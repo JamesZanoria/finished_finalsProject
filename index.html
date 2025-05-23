@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkyReserve</title>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="footer.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+
+</head>
+
+<body>
+  <header data-aos="fade-down" data-aos-duration="3000">
+    <h1 class="logo">SKYRESERVE</h1>
+    <nav>
+      <ul class="nav_links">
+        <li><a href="TI/TI.html">Travel Info</a></li>
+        <li><a href="About/About.html">About</a></li>
+        <li><a href="#">Log In</a></li>
+      </ul>
+    </nav>
+    <div class="menu-icon" id="menuIcon">
+      <i class='bx bx-menu'></i>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <section class="left-section" data-aos="fade-right" data-aos-duration="3000">
+      <div class="content">
+        <h1>From screen to sky,<br> effortlessly yours.</h1>
+        <form id="bookingForm">
+          <div class="trip-type-wrapper">
+            <div class="custom-select">
+              <select name="trips" id="trips" required>
+                <option value="" disabled selected>Select your trip</option>
+                <option value="round-trip">Round-trip</option>
+                <option value="one-way">One-way</option>
+                <option value="multi-city">Multi-city</option>
+              </select>
+              <i class='bx bx-chevron-down'></i>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <div class="input-wrapper">
+              <label for="takeOff" class="input-label">From</label>
+              <select id="takeOff" required>
+                <option value="" disabled selected>Select departure</option>
+              </select>
+            </div>
+
+            <div class="icon">
+              <i class='bx bxs-plane-alt'></i>
+            </div>
+
+            <div class="input-wrapper">
+              <label for="arrival" class="input-label">To</label>
+              <select id="arrival" required>
+                <option value="" disabled selected>Select Destination</option>
+              </select>
+            </div>
+          </div>
+
+
+          <div class="input-group">
+            <div class="input-wrapper">
+              <label for="departureDate" class="input-label">Depart</label>
+              <input type="text" id="departureDate" name="date" placeholder="Depart" required>
+            </div>
+            <div class="icon">
+              <i class='bx bxs-calendar'></i>
+            </div>
+            <div class="input-wrapper">
+              <label for="returnDate" class="input-label">Return</label>
+              <input type="text" id="returnDate" name="date" placeholder="Returning on" required>
+            </div>
+          </div>
+
+
+          <button type="submit" onclick="proceedToNextPage()">Search flights</button>
+
+
+
+          <div id="results"></div>
+        </form>
+      </div>
+
+      <div class="slider">
+        <div class="slider-header">
+          <h2>Popular Destination</h2>
+          <div class="slider-buttons">
+            <button id="prev" class="slider-btn">
+              <i class='bx bx-chevron-left'></i>
+            </button>
+
+            <button id="next" class="slider-btn">
+              <i class='bx bx-chevron-right'></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="slider-container">
+          <div class="slider-images">
+
+            <div class="slide">
+              <img src="Images/china.jpg" alt="China">
+              <div class="info">
+                <p class="location">Beijing, China</p>
+                <p class="sub-location">The Great Wall Adventure</p>
+                <div class="price">
+                  <span class="slide-icon"><i class='bx bxs-plane-take-off'></i></span>
+                  <span>$430</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="slide">
+              <img src="Images/cyprus.jpg" alt="Cyprus">
+              <div class="info">
+                <p class="location">Paphos, Cyprus</p>
+                <p class="sub-location">Mediterranean Getaway</p>
+                <div class="price">
+                  <span class="slide-icon"><i class='bx bxs-plane-take-off'></i></span>
+                  <span>$520</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="slide">
+              <img src="Images/japan.jpg" alt="Japan">
+              <div class="info">
+                <p class="location">Tokyo, Japan</p>
+                <p class="sub-location">Cherry Blossoms & Culture</p>
+                <div class="price">
+                  <span class="slide-icon"><i class='bx bxs-plane-take-off'></i></span>
+                  <span>$480</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="slide">
+              <img src="Images/paris.jpg" alt="Paris">
+              <div class="info">
+                <p class="location">Paris, France</p>
+                <p class="sub-location">City of Lights</p>
+                <div class="price">
+                  <span class="slide-icon"><i class='bx bxs-plane-take-off'></i></span>
+                  <span>$610</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="slide">
+              <img src="Images/s.korea.jpg" alt="South Korea">
+              <div class="info">
+                <p class="location">Seoul, South Korea</p>
+                <p class="sub-location">Tech & Tradition</p>
+                <div class="price">
+                  <span class="slide-icon"><i class='bx bxs-plane-take-off'></i></span>
+                  <span>$450</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="slide">
+              <img src="Images/spain.jpg" alt="Spain">
+              <div class="info">
+                <p class="location">Barcelona, Spain</p>
+                <p class="sub-location">Beach & Gothic Charm</p>
+                <div class="price">
+                  <span class="slide-icon"><i class='bx bxs-plane-take-off'></i></span>
+                  <span>$560</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <div id="footer-placeholder"></div>
+
+  <script type="text/javascript" src="script.js"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+
+  <script>
+    AOS.init({ offset: 1 });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const today = new Date();
+
+      flatpickr("#departureDate", {
+        dateFormat: "d M Y",
+        defaultDate: today,
+        minDate: departureDate
+      });
+
+
+      flatpickr("#departureDate, #returnDate", {
+        mode: "range",
+        dateFormat: "d M Y",
+        minDate: today,
+        showMonths: 2,
+        onOpen: function (selectedDates, dateStr, instance) {
+          const calendarContainer = instance.calendarContainer;
+          calendarContainer.classList.add("dual-calendar");
+        },
+        onChange: function (selectedDates) {
+          if (selectedDates.length === 2) {
+            const [depart, ret] = selectedDates;
+
+            document.getElementById("departureDate").value = depart.toLocaleDateString("en-GB", {
+              day: "2-digit",
+              month: "short",
+              year: "numeric"
+            });
+
+            document.getElementById("returnDate").value = ret.toLocaleDateString("en-GB", {
+              day: "2-digit",
+              month: "short",
+              year: "numeric"
+            });
+          }
+        }
+      });
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        console.log("🔍 Initializing flight search...");
+        setupLoadingAnimation();
+        populateLocations();
+        setupBookingSubmission();
+    });
+
+
+    function setupLoadingAnimation() {
+      const loadingOverlay = document.createElement("div");
+      loadingOverlay.id = "loadingOverlay";
+      loadingOverlay.style.display = "none";
+      loadingOverlay.innerHTML = "<p>🔄 Searching for flights...</p>";
+      document.body.appendChild(loadingOverlay);
+    }
+
+    function showLoading() {
+      document.getElementById("loadingOverlay").style.display = "block";
+    }
+
+    function hideLoading() {
+      document.getElementById("loadingOverlay").style.display = "none";
+    }
+
+    function populateLocations() {
+      const departureSelect = document.getElementById("takeOff");
+      const destinationSelect = document.getElementById("arrival");
+      const apiUrl = "https://test-flight2.azurewebsites.net/api/GetLocations";
+
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          if (!data || !Array.isArray(data.locations)) throw new Error("No locations available.");
+
+          populateDropdown(departureSelect, data.locations, "Select Departure");
+          populateDropdown(destinationSelect, data.locations, "Select Destination");
+        })
+        .catch(error => {
+          console.error("❌ Error fetching locations:", error);
+          departureSelect.innerHTML = "<option>⚠ Error loading locations</option>";
+          destinationSelect.innerHTML = "<option>⚠ Error loading locations</option>";
+        });
+    }
+
+    function populateDropdown(selectElement, options, placeholder) {
+      selectElement.innerHTML = `<option value="" disabled selected>${placeholder}</option>`;
+      options.forEach(location => {
+        const option = document.createElement("option");
+        option.value = location;
+        option.textContent = location;
+        selectElement.appendChild(option);
+      });
+    }
+
+    function setupBookingSubmission() {
+    const bookingForm = document.getElementById("bookingForm");
+
+    if (!bookingForm) {
+        console.error("❌ Booking form not found.");
+        return;
+    }
+
+    bookingForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        showLoading();
+
+        const departure = document.getElementById("takeOff").value;
+        const destination = document.getElementById("arrival").value;
+
+        if (!departure || !destination) {
+            alert("⚠ Please select both departure and destination.");
+            hideLoading();
+            return;
+        }
+
+        fetchFlightData(departure, destination);
+    });
+  }
+
+    function fetchFlightData(departure, destination) {
+      const apiUrl = `https://test-flight2.azurewebsites.net/api/FlightSearch?departure=${encodeURIComponent(departure)}&destination=${encodeURIComponent(destination)}`;
+
+      document.addEventListener("DOMContentLoaded", () => {
+            console.log("🔍 Initializing flight search...");
+            populateLocations();
+            setupBookingSubmission();
+        });
+
+      function setupLoadingAnimation() {
+        const loadingOverlay = document.createElement("div");
+        loadingOverlay.id = "loadingOverlay";
+        loadingOverlay.style.display = "none";
+        loadingOverlay.innerHTML = "<p>🔄 Searching for flights...</p>";
+        document.body.appendChild(loadingOverlay);
+      }
+
+      function showLoading() {
+        document.getElementById("loadingOverlay").style.display = "block";
+      }
+
+      function hideLoading() {
+        document.getElementById("loadingOverlay").style.display = "none";
+      }
+
+      function populateLocations() {
+            const departureSelect = document.getElementById("takeOff");
+            const destinationSelect = document.getElementById("arrival");
+            const apiUrl = "https://test-flight2.azurewebsites.net/api/GetLocations";
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    console.log("🌍 API Response:", data);
+                    if (!data || !Array.isArray(data.locations)) throw new Error("No locations available.");
+
+                    populateDropdown(departureSelect, data.locations, "Select Departure");
+                    populateDropdown(destinationSelect, data.locations, "Select Destination");
+                })
+                .catch(error => {
+                    console.error("❌ Error fetching locations:", error);
+                    departureSelect.innerHTML = "<option>⚠ Error loading locations</option>";
+                    destinationSelect.innerHTML = "<option>⚠ Error loading locations</option>";
+                });
+        }
+
+      function populateDropdown(selectElement, options, placeholder) {
+            selectElement.innerHTML = `<option value="" disabled selected>${placeholder}</option>`;
+            options.forEach(location => {
+                const option = document.createElement("option");
+                option.value = location;
+                option.textContent = location;
+                selectElement.appendChild(option);
+            });
+        }
+
+      function setupBookingSubmission() {
+            const bookingForm = document.getElementById("bookingForm");
+
+            if (!bookingForm) {
+                console.error("❌ Booking form not found.");
+                return;
+            }
+
+            bookingForm.addEventListener("submit", function (event) {
+                event.preventDefault();
+                showLoading();
+
+                const departure = document.getElementById("takeOff").value;
+                const destination = document.getElementById("arrival").value;
+
+                if (!departure || !destination) {
+                    alert("⚠ Please select both departure and destination.");
+                    hideLoading();
+                    return;
+                }
+
+                fetchFlightData(departure, destination);
+            });
+        }
+
+      function fetchFlightData(departure, destination) {
+            const apiUrl = `https://test-flight2.azurewebsites.net/api/FlightSearch?departure=${encodeURIComponent(departure)}&destination=${encodeURIComponent(destination)}`;
+            
+            console.log("🚀 Fetching flight data:", apiUrl);
+
+            fetch(apiUrl)
+                .then(response => {
+                    console.log("📡 API Response Status:", response.status, response.statusText);
+                    if (!response.ok) throw new Error(`HTTP Error: ${response.status} - ${response.statusText}`);
+                    return response.text();
+                })
+                .then(text => {
+                    console.log("🔍 Raw API Response:", text || "⚠ Empty response");
+                    return text.trim() ? JSON.parse(text) : { results: [] };
+                })
+                .then(data => {
+                    hideLoading();
+                    if (!data.results || data.results.length === 0) {
+                        console.warn("⚠ No flights found.");
+                        document.getElementById("results").innerHTML = "<p>⚠ No flights found. Try adjusting your search criteria.</p>";
+                        return;
+                    }
+                    displayFlightResults(data.results);
+                })
+                .catch(error => {
+                    console.error("❌ API Fetch Error:", error);
+                    document.getElementById("results").innerHTML = `<p>⚠ Unable to fetch flights. Check API availability.</p>`;
+                    hideLoading();
+                });
+        }
+
+        function displayFlightResults(flights) {
+            const resultsContainer = document.getElementById("results");
+            resultsContainer.innerHTML = "";
+
+            if (!flights || flights.length === 0) {
+                resultsContainer.innerHTML = "<p>No flights found. Please try another search.</p>";
+                return;
+            }
+
+            flights.forEach(flight => {
+                const flightElement = document.createElement("div");
+                flightElement.className = "flight-card";
+                flightElement.innerHTML = `
+                    <h3>${flight.airline} - ${flight.flightNumber}</h3>
+                    <p><strong>From:</strong> ${flight.from} → <strong>To:</strong> ${flight.to}</p>
+                    <p><strong>Price:</strong> ${flight.price} PHP</p>
+                    <p><strong>Departure:</strong> ${new Date(flight.departureTime).toLocaleString()}</p>
+                    <p><strong>Arrival:</strong> ${new Date(flight.arrivalTime).toLocaleString()}</p>
+                    <button onclick="confirmBooking('${flight.id}')">Confirm Booking</button>
+                `;
+                resultsContainer.appendChild(flightElement);
+            });
+        }
+
+        document.getElementById("searchFlightButton").addEventListener("click", function(event) {
+            event.preventDefault(); // Prevent refresh
+
+            // Extract values properly (NOT elements)
+            const takeOff = document.querySelector("#takeOff option:checked")?.value || "";
+            const arrival = document.querySelector("#arrival option:checked")?.value || "";
+            const departureDate = document.getElementById("departureDate")?.value?.trim() || "";
+            const returnDate = document.getElementById("returnDate")?.value?.trim() || "";
+
+            if (!takeOff || !arrival || !departureDate) {
+                alert("⚠ Please enter all required fields before searching!");
+                return;
+            }
+
+            localStorage.setItem("takeOff", takeOff);
+            localStorage.setItem("arrival", arrival);
+            localStorage.setItem("departureDate", departureDate);
+            localStorage.setItem("returnDate", returnDate);
+
+            console.log("✅ Stored flight details correctly:", { takeOff, arrival, departureDate, returnDate });
+
+            window.location.href = "confirmation.html"; // Redirect
+        });
+}
+
+      function proceedToNextPage() {
+          console.log("✅ Redirecting to confirmation page...");
+          window.location.href = "confirmation.html";
+      }
+
+        function detectUserLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+            } else {
+                console.error("❌ Geolocation is not supported.");
+                setDefaultDeparture();
+            }
+        }
+
+        function successCallback(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            console.log(`📍 User Location: ${latitude}, ${longitude}`);
+
+            // Reverse geocoding to fetch the country
+            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
+                .then(response => response.json())
+                .then(data => {
+                    const country = data.address.country || "Philippines"; // Default fallback
+                    console.log(`🌍 Detected Country: ${country}`);
+                    document.getElementById("takeOff").value = country;
+                })
+                .catch(error => {
+                    console.error("❌ Location fetch failed:", error);
+                    setDefaultDeparture();
+                });
+        }
+
+        function errorCallback(error) {
+            console.error("❌ Geolocation Error:", error.message);
+            setDefaultDeparture();
+        }
+
+        function setDefaultDeparture() {
+            document.getElementById("takeOff").value = "Philippines"; // Fallback location
+        }
+
+        // Call this function inside `DOMContentLoaded`
+        document.addEventListener("DOMContentLoaded", detectUserLocation);
+
+      fetch("Footer/footer.html")
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById("footer-placeholder").innerHTML = data;
+        });
+  </script>
+</body>
+</html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkyReserve</title>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="footer.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container flex">
+      <a href="../index.html" class="site-brand">
+        SKYRESERVE
+      </a>
+
+      <button type="button" id="navbar-show-btn" class="flex">
+        <i class='bx bx-menu' ></i>
+      </button>
+
+      <div id="navbar-collapse">
+        <button type="button" id="navbar-close-btn" class="flex">
+          <i class='bx bx-x'></i>
+        </button>
+
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a href="../index.html" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="#gallery" class="nav-link">Gallery</a>
+          </li>
+          <li class="nav-item">
+            <a href="#featured" class="nav-link">Featured</a>
+          </li>
+          <li class="nav-item">
+            <a href="#services" class="nav-link">Services</a>
+          </li>
+          <li class="nav-item">
+            <a href="#testimonials" class="nav-link">Testimonials</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="flex header-sm">
+    <div class="container">
+      <div class="header-title">
+        <h1>Travel Information</h1>
+        <p>Discover the latest travel trends, tips, and destination guides. Whether you're planning a relaxing vacation or an adventurous getaway, we've got the information you need to make your journey unforgettable.</p>      </div>
+    </div>
+  </header>
+
+  <div id="gallery" class="py-4">
+    <div class="container">
+      <div class="gallery-row">
+        <div class="gallery-item shadow">
+          <img src="../Images/cambodia.jpg" alt="">
+          <span class="zoom-icon">
+            <i class='bx bx-zoom-in' ></i>
+          </span>
+        </div>
+
+        <div class="gallery-item shadow">
+          <img src="../Images/india.jpg" alt="">
+          <span class="zoom-icon">
+            <i class='bx bx-zoom-in' ></i>
+          </span>
+        </div>
+
+        <div class="gallery-item shadow">
+          <img src="../Images/wall.jpg" alt="">
+          <span class="zoom-icon">
+            <i class='bx bx-zoom-in' ></i>
+          </span>
+        </div>
+
+        <div class="gallery-item shadow">
+          <img src="../Images/tower.jpg" alt="">
+          <span class="zoom-icon">
+            <i class='bx bx-zoom-in' ></i>
+          </span>
+        </div>
+
+        <div class="gallery-item shadow">
+          <img src="../Images/sydney.jpg" alt="">
+          <span class="zoom-icon">
+            <i class='bx bx-zoom-in' ></i>
+          </span>
+        </div>
+
+        <div class="gallery-item shadow">
+          <img src="../Images/sd.jpg" alt="">
+          <span class="zoom-icon">
+            <i class='bx bx-zoom-in' ></i>
+          </span>
+        </div>
+
+        <div class="gallery-item shadow">
+          <img src="../Images/peru.jpg" alt="">
+          <span class="zoom-icon">
+            <i class='bx bx-zoom-in' ></i>
+          </span>
+        </div>
+
+        <div class="gallery-item shadow">
+          <img src="../Images/jerusalem.jpg" alt="">
+          <span class="zoom-icon">
+            <i class='bx bx-zoom-in' ></i>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div id="img-modal-box">
+    <div id="img-modal">
+      <button type="button" id="modal-close-btn" class="flex">
+        <i class='bx bx-x' ></i>
+      </button>
+
+      <button id="prev-btn" class="flex">
+        <i class='bx bx-chevron-left' ></i>
+      </button>
+
+      <button id="next-btn" class="flex">
+        <i class='bx bx-chevron-right' ></i>
+      </button>
+      <img src="../Images/cambodia.jpg">
+    </div>
+  </div>
+
+  <section id="featured" class="py-4">
+    <div class="container">
+      <div class="title-wrap">
+        <span class="sm-title">know about some places before your travel</span>
+        <h2 class="lg-title">featured places</h2>
+      </div>
+
+      <div class="featured-row">
+        <div class="featured-item my-2 shadow">
+          <img src="../Images/featured-berlin-germany.jpg">
+          <div class="featured-item-content">
+            <span>
+              <i class="fas fa-map-marker-alt"></i>
+              Berlin, Germany
+            </span>
+            <div>
+              <p class="text">Berlin is known for its vibrant culture, rich history, and modern architecture. From the iconic Brandenburg Gate to the bustling streets of Alexanderplatz, there's something for every type of traveler in Germany's capital.</p>            </div>
+          </div>
+        </div>
+
+        <div class="featured-item my-2 shadow">
+          <img src="../Images/featured-fuvahmulah-maldives.jpg">
+          <div class="featured-item-content">
+            <span>
+              <i class="fas fa-map-marker-alt"></i>
+              Fuvahmulah, Maldives
+            </span>
+            <div>
+              <p class="text">Fuvahmulah is one of the most unique islands in the Maldives, known for its freshwater lakes and stunning marine biodiversity. It’s a hidden paradise perfect for those seeking tranquility and adventure under the crystal-clear waters.</p>            </div>
+          </div>
+        </div>
+
+        <div class="featured-item my-2 shadow">
+          <img src="../Images/featured-khwaeng-wat-arun-thailand.jpg">
+          <div class="featured-item-content">
+            <span>
+              <i class="fas fa-map-marker-alt"></i>
+              Khwaeng Wat Arun, Thailand
+            </span>
+            <div>
+              <p class="text">Wat Arun, also known as the Temple of Dawn, is one of Thailand's most famous landmarks. Its towering spires are a beautiful sight, especially during sunset, making it a must-visit spot for anyone in Bangkok.</p>            </div>
+          </div>
+        </div>
+
+        <div class="featured-item my-2 shadow">
+          <img src="../Images/featured-north-bondi-australia.jpg">
+          <div class="featured-item-content">
+            <span>
+              <i class="fas fa-map-marker-alt"></i>
+              North Bondi, Australia
+            </span>
+            <div>
+              <p class="text">North Bondi is famous for its golden sands, great surf, and laid-back beach atmosphere.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="featured-item my-2 shadow">
+          <img src="../Images/featured-reo-de-janeiro-brazil.jpg">
+          <div class="featured-item-content">
+            <span>
+              <i class="fas fa-map-marker-alt"></i>
+              Rio De Janeiro, Brazil
+            </span>
+            <div>
+              <p class="text">Rio is known for its lively Carnival, stunning beaches, and the iconic Christ the Redeemer statue.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="featured-item my-2 shadow">
+          <img src="../Images/featured-rome-italy.jpg">
+          <div class="featured-item-content">
+            <span>
+              <i class="fas fa-map-marker-alt"></i>
+              Rome, Italy
+            </span>
+            <div>
+              <p class="text">Rome blends ancient history with modern Italian charm, offering landmarks like the Colosseum and Vatican.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="py-4">
+    <div class="container">
+      <div class="title-wrap">
+        <span class="sm-title">know about services that we offer</span>
+        <h2 class="lg-title">Our services</h2>
+      </div>
+
+      <div class="services-row">
+        <div class="services-item">
+          <span class="services-icon">
+            <i class='bx bx-hotel'></i>
+          </span>
+          <h3>Luxurious Hotel</h3>
+          <p class="text">Experience unmatched comfort and elegance in our world-class hotels, designed for relaxation and style.</p>
+          <a href="#" class="btn">Read more</a>
+        </div>
+
+        <div class="services-item">
+          <span class="services-icon">
+            <i class='bx bxs-plane-take-off' ></i>
+          </span>
+          <h3>Travel Guide</h3>
+          <p class="text">Explore new destinations with expert guides who provide insider tips and recommendations.</p>
+          <a href="#" class="btn">Read more</a>
+        </div>
+
+        <div class="services-item">
+          <span class="services-icon">
+            <i class='bx bx-briefcase-alt' ></i>
+          </span>
+          <h3>Suitable Price</h3>
+          <p class="text">Affordable options without compromising on quality, ensuring great value for every traveler.</p>
+          <a href="#" class="btn">Read more</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials" class="py-4">
+    <div class="container">
+      <div class="title-wrap">
+        <span class="sm-title">what our clients say about us</span>
+        <h2 class="lg-title">testimonials</h2>
+      </div>
+
+      <div class="test-row">
+        <div class="test-item">
+          <p class="text">Had an unforgettable experience in Japan. From the vibrant city life to the serene temples, every moment was amazing!</p>
+          <div class="test-item-info">
+            <img src="../Images/kris.jpg">
+            <div>
+              <h3>Kris Mesola</h3>
+              <p class="text">Trip to Japan</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-item">
+          <p class="text">South Korea was an incredible adventure. The blend of modern cities and traditional culture made it a truly unique trip.</p>
+          <div class="test-item-info">
+            <img src="../Images/migs.png">
+            <div>
+              <h3>Miguel Andaya</h3>
+              <p class="text">Trip to South Korea</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-item">
+          <p class="text">The Maldives was pure paradise! The crystal-clear waters, beautiful resorts, and serene beaches made it an unforgettable getaway.</p>
+          <div class="test-item-info">
+            <img src="../Images/james.jpg">
+            <div>
+              <h3>James Galon</h3>
+              <p class="text">Trip to Maldives</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-item">
+          <p class="text">Kuwait's blend of ancient history and modern architecture was captivating. I had a fantastic time exploring the city!</p>
+          <div class="test-item-info">
+            <img src="../Images/rem.webp">
+            <div>
+              <h3>Remegio Magallanes</h3>
+              <p class="text">Trip to Kuwait</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="video">
+    <div class="video-wrapper flex">
+      <video loop>
+        <source src="../Images/video-section.mp4" type="video/mp4">
+      </video>
+      <button type="button" id="play-btn">
+        <i class='bx bx-play' ></i>
+      </button>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="script.js"></script>
+  <script>
+    let video = document.querySelector('.video-wrapper video');
+    document.getElementById('play-btn').addEventListener('click', () => {
+        if(video.paused){
+            video.play();
+        } else {
+            video.pause();
+        }
+    });
+
+    fetch("../Footer/footer.html")
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById("footer-placeholder").innerHTML = data;
+        });
+</script>
+</body>
+</html>
