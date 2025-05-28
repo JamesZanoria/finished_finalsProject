@@ -8,21 +8,22 @@
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="footer.css">
+
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 
-</head>
-
 <body>
+  <!-- Header Section -->
   <header data-aos="fade-down" data-aos-duration="3000">
+    <!-- Logo Section -->
     <h1 class="logo">SKYRESERVE</h1>
     <nav>
       <ul class="nav_links">
         <li><a href="TI/TI.html">Travel Info</a></li>
         <li><a href="About/About.html">About</a></li>
-        <li><a href="#">Log In</a></li>
+        <li><a href="login.html">Log In</a></li>
       </ul>
     </nav>
     <div class="menu-icon" id="menuIcon">
@@ -30,24 +31,28 @@
     </div>
   </header>
 
+  <!-- Main Section -->
   <main class="main-container">
     <section class="left-section" data-aos="fade-right" data-aos-duration="3000">
       <div class="content">
+        <!-- Title Section -->
         <h1>From screen to sky,<br> effortlessly yours.</h1>
+        <!-- Form Section -->
         <form id="bookingForm">
+
+          <!-- Trip Section -->
           <div class="trip-type-wrapper">
             <div class="custom-select">
               <select name="trips" id="trips" required>
                 <option value="" disabled selected>Select your trip</option>
                 <option value="round-trip">Round-trip</option>
-                <option value="one-way">One-way</option>
-                <option value="multi-city">Multi-city</option>
               </select>
               <i class='bx bx-chevron-down'></i>
             </div>
           </div>
 
           <div class="input-group">
+            <!-- Departure Section -->
             <div class="input-wrapper">
               <label for="takeOff" class="input-label">From</label>
               <select id="takeOff" required>
@@ -59,6 +64,7 @@
               <i class='bx bxs-plane-alt'></i>
             </div>
 
+            <!-- Destination Section -->
             <div class="input-wrapper">
               <label for="arrival" class="input-label">To</label>
               <select id="arrival" required>
@@ -67,30 +73,30 @@
             </div>
           </div>
 
-
           <div class="input-group">
+            <!-- Departure Date Section -->
             <div class="input-wrapper">
               <label for="departureDate" class="input-label">Depart</label>
               <input type="text" id="departureDate" name="date" placeholder="Depart" required>
             </div>
+
             <div class="icon">
               <i class='bx bxs-calendar'></i>
             </div>
+
+            <!-- Return Date Section -->
             <div class="input-wrapper">
               <label for="returnDate" class="input-label">Return</label>
               <input type="text" id="returnDate" name="date" placeholder="Returning on" required>
             </div>
           </div>
 
-
-          <button type="submit" onclick="proceedToNextPage()">Search flights</button>
-
-
-
-          <div id="results"></div>
+          <!-- Button Section -->
+          <button type="submit">Search flights</button>
         </form>
       </div>
 
+      <!-- Slider Section -->
       <div class="slider">
         <div class="slider-header">
           <h2>Popular Destination</h2>
@@ -186,111 +192,126 @@
     </section>
   </main>
 
-
+  <!-- Footer Section -->
   <div id="footer-placeholder"></div>
 
   <script type="text/javascript" src="script.js"></script>
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-
   <script>
+    // To animate
     AOS.init({ offset: 1 });
 
     document.addEventListener("DOMContentLoaded", () => {
-      const today = new Date();
+        const today = new Date();
 
-      flatpickr("#departureDate", {
-        dateFormat: "d M Y",
-        defaultDate: today,
-        minDate: departureDate
-      });
+        // Initialize departure date picker (dual-calendar but single selection display)
+        const departurePicker = flatpickr("#departureDate", {
+            dateFormat: "d M Y",
+            defaultDate: today,
+            minDate: today,
+            showMonths: 2, // Displays May & June side by side
+            mode: "range", // Enables range selection but modifies input display
+            onOpen: function (selectedDates, dateStr, instance) {
+                try {
+                    const calendarContainer = instance.calendarContainer;
+                    if (calendarContainer) {
+                        calendarContainer.classList.add("dual-calendar"); // Styling only for departure picker
+                    }
+                } catch (error) {
+                    console.warn("Flatpickr styling error:", error);
+                }
+            },
+            onChange: function (selectedDates) {
+                if (selectedDates.length > 0) {
+                    const departDate = selectedDates[0];
 
+                    // Ensure return date starts in June while staying empty initially
+                    returnPicker.set("minDate", departDate);
 
-      flatpickr("#departureDate, #returnDate", {
-        mode: "range",
-        dateFormat: "d M Y",
-        minDate: today,
-        showMonths: 2,
-        onOpen: function (selectedDates, dateStr, instance) {
-          const calendarContainer = instance.calendarContainer;
-          calendarContainer.classList.add("dual-calendar");
-        },
-        onChange: function (selectedDates) {
-          if (selectedDates.length === 2) {
-            const [depart, ret] = selectedDates;
+                    // Show only departure date in input (not full range)
+                    departurePicker.input.value = flatpickr.formatDate(departDate, "d M Y");
 
-            document.getElementById("departureDate").value = depart.toLocaleDateString("en-GB", {
-              day: "2-digit",
-              month: "short",
-              year: "numeric"
-            });
+                    // Update the return field ONLY when both dates are selected
+                    if (selectedDates.length === 2) {
+                        document.getElementById("returnDate").value = flatpickr.formatDate(selectedDates[1], "d M Y");
+                    } else {
+                        document.getElementById("returnDate").value = "";
+                    }
+                }
+            }
+        });
 
-            document.getElementById("returnDate").value = ret.toLocaleDateString("en-GB", {
-              day: "2-digit",
-              month: "short",
-              year: "numeric"
-            });
-          }
-        }
-      });
+        // Initialize return date input (neutral, waits for user selection)
+        const returnPicker = flatpickr("#returnDate", {
+            dateFormat: "d M Y",
+            minDate: today, // Updates dynamically but stays independent
+            defaultDate: null, // Keeps field empty until user selects
+        });
     });
 
-    document.addEventListener("DOMContentLoaded", () => {
-        console.log("🔍 Initializing flight search...");
-        setupLoadingAnimation();
-        populateLocations();
-        setupBookingSubmission();
-    });
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("🔍 Initializing flight search...");
+    setupLoadingAnimation();
+    populateLocations();
+    setupBookingSubmission();
+});
 
+// 🔄 Setup Loading Animation Once
+function setupLoadingAnimation() {
+    const loadingOverlay = document.createElement("div");
+    loadingOverlay.id = "loadingOverlay";
+    loadingOverlay.style.display = "none";
+    loadingOverlay.innerHTML = "<p>🔄 Searching for flights...</p>";
+    document.body.appendChild(loadingOverlay);
+}
 
-    function setupLoadingAnimation() {
-      const loadingOverlay = document.createElement("div");
-      loadingOverlay.id = "loadingOverlay";
-      loadingOverlay.style.display = "none";
-      loadingOverlay.innerHTML = "<p>🔄 Searching for flights...</p>";
-      document.body.appendChild(loadingOverlay);
-    }
+function showLoading() {
+    document.getElementById("loadingOverlay").style.display = "block";
+}
 
-    function showLoading() {
-      document.getElementById("loadingOverlay").style.display = "block";
-    }
+function hideLoading() {
+    document.getElementById("loadingOverlay").style.display = "none";
+}
 
-    function hideLoading() {
-      document.getElementById("loadingOverlay").style.display = "none";
-    }
+// 🌍 Fetch Locations from PHP instead of Azure
+function populateLocations() {
+    const departureSelect = document.getElementById("takeOff");
+    const destinationSelect = document.getElementById("arrival");
+    const apiUrl = "http://localhost:5500/location.php"; // ✅ PHP API call
 
-    function populateLocations() {
-      const departureSelect = document.getElementById("takeOff");
-      const destinationSelect = document.getElementById("arrival");
-      const apiUrl = "https://test-flight2.azurewebsites.net/api/GetLocations";
-
-      fetch(apiUrl)
-        .then(response => response.json())
+    fetch(apiUrl)
+        .then(response => {
+            console.log("📡 Locations API Response:", response.status, response.statusText);
+            if (!response.ok) throw new Error(`HTTP Error ${response.status}`);
+            return response.json();
+        })
         .then(data => {
-          if (!data || !Array.isArray(data.locations)) throw new Error("No locations available.");
-
-          populateDropdown(departureSelect, data.locations, "Select Departure");
-          populateDropdown(destinationSelect, data.locations, "Select Destination");
+            console.log("🌍 Locations Data:", data);
+            if (!data.locations || !Array.isArray(data.locations)) throw new Error("No locations found.");
+            populateDropdown(departureSelect, data.locations, "Select Departure");
+            populateDropdown(destinationSelect, data.locations, "Select Destination");
         })
         .catch(error => {
-          console.error("❌ Error fetching locations:", error);
-          departureSelect.innerHTML = "<option>⚠ Error loading locations</option>";
-          destinationSelect.innerHTML = "<option>⚠ Error loading locations</option>";
+            console.error("❌ Error fetching locations:", error);
+            departureSelect.innerHTML = "<option>⚠ Error loading locations</option>";
+            destinationSelect.innerHTML = "<option>⚠ Error loading locations</option>";
         });
-    }
+}
 
-    function populateDropdown(selectElement, options, placeholder) {
-      selectElement.innerHTML = `<option value="" disabled selected>${placeholder}</option>`;
-      options.forEach(location => {
+function populateDropdown(dropdown, locations, defaultText) {
+    dropdown.innerHTML = `<option disabled selected>${defaultText}</option>`;
+    locations.forEach(location => {
         const option = document.createElement("option");
         option.value = location;
         option.textContent = location;
-        selectElement.appendChild(option);
-      });
-    }
+        dropdown.appendChild(option);
+    });
+}
 
-    function setupBookingSubmission() {
+// ✈️ Setup Booking Submission
+function setupBookingSubmission() {
     const bookingForm = document.getElementById("bookingForm");
 
     if (!bookingForm) {
@@ -313,174 +334,85 @@
 
         fetchFlightData(departure, destination);
     });
-  }
+}
 
-    function fetchFlightData(departure, destination) {
-      const apiUrl = `https://test-flight2.azurewebsites.net/api/FlightSearch?departure=${encodeURIComponent(departure)}&destination=${encodeURIComponent(destination)}`;
+// ✈️ Fetch Flight Data from PHP Instead of Azure
+function fetchFlightData(departure, destination) {
+    const apiUrl = `http://localhost:5000/flights.php?departure=${encodeURIComponent(departure)}&destination=${encodeURIComponent(destination)}`; // ✅ PHP API Integration
 
-      document.addEventListener("DOMContentLoaded", () => {
-            console.log("🔍 Initializing flight search...");
-            populateLocations();
-            setupBookingSubmission();
-        });
+    console.log("🚀 Fetching flight data:", apiUrl);
 
-      function setupLoadingAnimation() {
-        const loadingOverlay = document.createElement("div");
-        loadingOverlay.id = "loadingOverlay";
-        loadingOverlay.style.display = "none";
-        loadingOverlay.innerHTML = "<p>🔄 Searching for flights...</p>";
-        document.body.appendChild(loadingOverlay);
-      }
-
-      function showLoading() {
-        document.getElementById("loadingOverlay").style.display = "block";
-      }
-
-      function hideLoading() {
-        document.getElementById("loadingOverlay").style.display = "none";
-      }
-
-      function populateLocations() {
-            const departureSelect = document.getElementById("takeOff");
-            const destinationSelect = document.getElementById("arrival");
-            const apiUrl = "https://test-flight2.azurewebsites.net/api/GetLocations";
-
-            fetch(apiUrl)
-                .then(response => response.json())
-                .then(data => {
-                    console.log("🌍 API Response:", data);
-                    if (!data || !Array.isArray(data.locations)) throw new Error("No locations available.");
-
-                    populateDropdown(departureSelect, data.locations, "Select Departure");
-                    populateDropdown(destinationSelect, data.locations, "Select Destination");
-                })
-                .catch(error => {
-                    console.error("❌ Error fetching locations:", error);
-                    departureSelect.innerHTML = "<option>⚠ Error loading locations</option>";
-                    destinationSelect.innerHTML = "<option>⚠ Error loading locations</option>";
-                });
-        }
-
-      function populateDropdown(selectElement, options, placeholder) {
-            selectElement.innerHTML = `<option value="" disabled selected>${placeholder}</option>`;
-            options.forEach(location => {
-                const option = document.createElement("option");
-                option.value = location;
-                option.textContent = location;
-                selectElement.appendChild(option);
-            });
-        }
-
-      function setupBookingSubmission() {
-            const bookingForm = document.getElementById("bookingForm");
-
-            if (!bookingForm) {
-                console.error("❌ Booking form not found.");
+    fetch(apiUrl)
+        .then(response => {
+            console.log("📡 API Response Status:", response.status, response.statusText);
+            if (!response.ok) throw new Error(`HTTP Error: ${response.status} - ${response.statusText}`);
+            return response.text();
+        })
+        .then(text => {
+            console.log("🔍 Raw API Response:", text || "⚠ Empty response");
+            return text.trim() ? JSON.parse(text) : { results: [] };
+        })
+        .then(data => {
+            hideLoading();
+            if (!data.results || data.results.length === 0) {
+                console.warn("⚠ No flights found.");
+                document.getElementById("results").innerHTML = "<p>⚠ No flights found. Try adjusting your search criteria.</p>";
                 return;
             }
-
-            bookingForm.addEventListener("submit", function (event) {
-                event.preventDefault();
-                showLoading();
-
-                const departure = document.getElementById("takeOff").value;
-                const destination = document.getElementById("arrival").value;
-
-                if (!departure || !destination) {
-                    alert("⚠ Please select both departure and destination.");
-                    hideLoading();
-                    return;
-                }
-
-                fetchFlightData(departure, destination);
-            });
-        }
-
-      function fetchFlightData(departure, destination) {
-            const apiUrl = `https://test-flight2.azurewebsites.net/api/FlightSearch?departure=${encodeURIComponent(departure)}&destination=${encodeURIComponent(destination)}`;
-            
-            console.log("🚀 Fetching flight data:", apiUrl);
-
-            fetch(apiUrl)
-                .then(response => {
-                    console.log("📡 API Response Status:", response.status, response.statusText);
-                    if (!response.ok) throw new Error(`HTTP Error: ${response.status} - ${response.statusText}`);
-                    return response.text();
-                })
-                .then(text => {
-                    console.log("🔍 Raw API Response:", text || "⚠ Empty response");
-                    return text.trim() ? JSON.parse(text) : { results: [] };
-                })
-                .then(data => {
-                    hideLoading();
-                    if (!data.results || data.results.length === 0) {
-                        console.warn("⚠ No flights found.");
-                        document.getElementById("results").innerHTML = "<p>⚠ No flights found. Try adjusting your search criteria.</p>";
-                        return;
-                    }
-                    displayFlightResults(data.results);
-                })
-                .catch(error => {
-                    console.error("❌ API Fetch Error:", error);
-                    document.getElementById("results").innerHTML = `<p>⚠ Unable to fetch flights. Check API availability.</p>`;
-                    hideLoading();
-                });
-        }
-
-        function displayFlightResults(flights) {
-            const resultsContainer = document.getElementById("results");
-            resultsContainer.innerHTML = "";
-
-            if (!flights || flights.length === 0) {
-                resultsContainer.innerHTML = "<p>No flights found. Please try another search.</p>";
-                return;
-            }
-
-            flights.forEach(flight => {
-                const flightElement = document.createElement("div");
-                flightElement.className = "flight-card";
-                flightElement.innerHTML = `
-                    <h3>${flight.airline} - ${flight.flightNumber}</h3>
-                    <p><strong>From:</strong> ${flight.from} → <strong>To:</strong> ${flight.to}</p>
-                    <p><strong>Price:</strong> ${flight.price} PHP</p>
-                    <p><strong>Departure:</strong> ${new Date(flight.departureTime).toLocaleString()}</p>
-                    <p><strong>Arrival:</strong> ${new Date(flight.arrivalTime).toLocaleString()}</p>
-                    <button onclick="confirmBooking('${flight.id}')">Confirm Booking</button>
-                `;
-                resultsContainer.appendChild(flightElement);
-            });
-        }
-
-        document.getElementById("searchFlightButton").addEventListener("click", function(event) {
-            event.preventDefault(); // Prevent refresh
-
-            // Extract values properly (NOT elements)
-            const takeOff = document.querySelector("#takeOff option:checked")?.value || "";
-            const arrival = document.querySelector("#arrival option:checked")?.value || "";
-            const departureDate = document.getElementById("departureDate")?.value?.trim() || "";
-            const returnDate = document.getElementById("returnDate")?.value?.trim() || "";
-
-            if (!takeOff || !arrival || !departureDate) {
-                alert("⚠ Please enter all required fields before searching!");
-                return;
-            }
-
-            localStorage.setItem("takeOff", takeOff);
-            localStorage.setItem("arrival", arrival);
-            localStorage.setItem("departureDate", departureDate);
-            localStorage.setItem("returnDate", returnDate);
-
-            console.log("✅ Stored flight details correctly:", { takeOff, arrival, departureDate, returnDate });
-
-            window.location.href = "confirmation.html"; // Redirect
+            displayFlightResults(data.results);
+        })
+        .catch(error => {
+            console.error("❌ API Fetch Error:", error);
+            document.getElementById("results").innerHTML = `<p>⚠ Unable to fetch flights. Check API availability.</p>`;
+            hideLoading();
         });
 }
 
+// 🎫 Display Flight Results
+function displayFlightResults(flights) {
+    const resultsContainer = document.getElementById("results");
+    resultsContainer.innerHTML = "";
+
+    if (!flights || flights.length === 0) {
+        resultsContainer.innerHTML = "<p>No flights found. Please try another search.</p>";
+        return;
+    }
+
+    flights.forEach(flight => {
+        const flightElement = document.createElement("div");
+        flightElement.className = "flight-card";
+        flightElement.innerHTML = `
+            <h3>${flight.airline} - ${flight.flightNumber}</h3>
+            <p><strong>From:</strong> ${flight.from} → <strong>To:</strong> ${flight.to}</p>
+            <p><strong>Price:</strong> ${flight.price} PHP</p>
+            <p><strong>Departure:</strong> ${new Date(flight.departureTime).toLocaleString()}</p>
+            <p><strong>Arrival:</strong> ${new Date(flight.arrivalTime).toLocaleString()}</p>
+            <button onclick="confirmBooking('${flight.id}')">Confirm Booking</button>
+        `;
+        resultsContainer.appendChild(flightElement);
+    });
+}
+
+      document.getElementById("bookingForm").addEventListener("submit", function(event) {
+          event.preventDefault(); // Prevent actual submission
+
+          // Save values to LocalStorage
+          localStorage.setItem("from", document.getElementById("takeOff").value);
+          localStorage.setItem("to", document.getElementById("arrival").value);
+          localStorage.setItem("departureDate", document.getElementById("departureDate").value);
+          localStorage.setItem("returnDate", document.getElementById("returnDate").value);
+
+          // Redirect to confirmation page
+          window.location.href = "confirmation.html";
+      });
+
+      // To proceed to the hidden html
       function proceedToNextPage() {
           console.log("✅ Redirecting to confirmation page...");
           window.location.href = "confirmation.html";
       }
 
+        // To detect user location
         function detectUserLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(successCallback, errorCallback);

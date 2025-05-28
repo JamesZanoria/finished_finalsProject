@@ -7,7 +7,7 @@ footer{
     line-height: 20px;
 }
 
-.row{
+.footer-row{
     width: 85%;
     margin: auto;
     display: flex;
@@ -16,12 +16,12 @@ footer{
     justify-content: space-between;
 }
 
-.col{
+.footer-col{
     flex-basis: 25%;
     padding: 10px;
 }
 
-.col:nth-child(2), .col:nth-child(3){
+.footer-col:nth-child(2), .footer-col:nth-child(3){
     flex-basis: 15%;
 }
 
@@ -30,7 +30,7 @@ footer{
     top: -23px;
 }
 
-.col h3{
+.footer-col h3{
     width: fit-content;
     margin-bottom: 40px;
     position: relative;
@@ -42,17 +42,17 @@ footer{
     margin: 20px 0;
 }
 
-.col ul li{
+.footer-col ul li{
     list-style: none;
     margin-bottom: 12px;
 }
 
-.col ul li a{
+.footer-col ul li a{
     text-decoration: none;
     color: #fff;
 }
 
-.col form{
+.footer-col form{
     padding-bottom: 15px;
     display: flex;
     align-items: center;
@@ -61,12 +61,12 @@ footer{
     margin-bottom: 50px;
 }
 
-.col form .icon{
+.footer-col form .icon{
     font-size: 18px;
     margin-right: 10px;
 }
 
-.col form input{
+.footer-col form input{
     width: 100%;
     background: transparent;
     color: #ccc;
@@ -74,19 +74,19 @@ footer{
     outline: none;
 }
 
-.col form button{
+.footer-col form button{
     background: transparent;
     border: 0;
     outline: none;
     cursor: pointer;
 }
 
-.col form button .icon_right{
+.footer-col form button .icon_right{
     font-size: 16px;
     color: #ccc;
 }
 
-.col .social_icons .social_icon{
+.footer-col .social_icons .social_icon{
     width: 30px;
     height: 30px;
     border-radius: 50%;

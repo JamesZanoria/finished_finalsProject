@@ -7,7 +7,7 @@ footer{
     line-height: 20px;
 }
 
-.row{
+.footer-row{
     width: 85%;
     margin: auto;
     display: flex;
@@ -16,24 +16,40 @@ footer{
     justify-content: space-between;
 }
 
-.col{
+.footer-col{
     flex-basis: 25%;
     padding: 10px;
 }
 
-.col:nth-child(2), .col:nth-child(3){
+.footer-col:nth-of-type(2) p:first-of-type {
+    margin-top: 43px;
+}
+
+.footer-col p:nth-of-type(1),
+.footer-col p:nth-of-type(2),
+.footer-col p:nth-of-type(3) {
+    margin-bottom: 5px;
+}
+
+.footer-col h4 {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.footer-col:nth-child(2), .footer-col:nth-child(3){
     flex-basis: 15%;
 }
 
 .footer_about{
     position: relative;
-    top: -23px;
+    margin-top: 10px;
 }
 
-.col h3{
+.footer-col h3{
     width: fit-content;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     position: relative;
+    font-size: 18px;
 }
 
 .footer_email{
@@ -42,51 +58,60 @@ footer{
     margin: 20px 0;
 }
 
-.col ul li{
-    list-style: none;
-    margin-bottom: 12px;
+.footer-col ul {
+    padding: 0;
 }
 
-.col ul li a{
+.footer-col ul li{
+    list-style: none;
+    margin-top: 43px;
+}
+
+.footer-col ul li a{
     text-decoration: none;
     color: #fff;
 }
 
-.col form{
+.footer-col form{
     padding-bottom: 15px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid #f66335;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
+    margin-top: 43px;
 }
 
-.col form .icon{
+.footer-col form .icon{
     font-size: 18px;
     margin-right: 10px;
 }
 
-.col form input{
+.footer-col form input{
     width: 100%;
     background: transparent;
     color: #ccc;
     border: 0;
     outline: none;
+    flex: 1;
+    padding: 10px;
+    font-size: 12px;
 }
 
-.col form button{
+.footer-col form button{
     background: transparent;
     border: 0;
     outline: none;
     cursor: pointer;
+    padding: 10px 16px;
 }
 
-.col form button .icon_right{
+.footer-col form button .icon_right{
     font-size: 16px;
     color: #ccc;
 }
 
-.col .social_icons .social_icon{
+.footer-col .social_icons .social_icon{
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -100,7 +125,9 @@ footer{
     cursor: pointer;
 }
 
-hr{
+.footer-divider {
+    display: flex;
+    justify-content: center;
     width: 90%;
     border: 0;
     border-bottom: 1px solid #ccc;
@@ -109,6 +136,7 @@ hr{
 
 footer .copyright{
     text-align: center;
+    margin-top: 20px;
 }
 
 .bottom_line{

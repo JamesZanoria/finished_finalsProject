@@ -1,0 +1,347 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,500&display=swap');
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    overflow-x: hidden;
+}
+
+body{
+    font-family: "Montserrat", sans-serif;
+}
+
+li, a, button{
+    font-weight: 500;
+    font-size: 14px;
+    color: black;
+    text-decoration: none;
+}
+
+header{
+    position: fixed;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 2rem 9%;
+    background: white;
+    flex-wrap: wrap;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
+}
+
+.logo{
+    cursor: pointer;
+    margin-right: auto;
+    font-size: 3rem;
+    font-weight: bolder;
+    color: #FF5733;
+}
+
+.nav_links{
+    list-style: none;
+}
+
+.nav_links li{
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.nav_links li a{
+    border-bottom: 2px solid transparent;
+    transition: all 0.8s ease;
+}
+
+.nav_links li a:hover{
+    color: #fb9062;
+    border-bottom: 2px solid #ce4993;
+}
+
+.menu-icon{
+    font-size: 24px;
+    cursor: pointer;
+    display: none;
+}
+
+.login-container {
+    display: flex;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    backdrop-filter: blur(4px);
+}
+
+
+.login-left, .login-right {
+    flex: 1;
+    padding: 40px;
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+
+.login-left {
+    border-right: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url(Images/d06e05ad36516f5172e7c2b99009941f.jpg.webp);
+    background-size: cover;
+}
+
+.login-right {
+    position: fixed;
+    right: -300px;
+    top: 0;
+    height: 100%;
+    width: 300px;
+    background: linear-gradient(135deg, #00AEEF, #008080);
+    transition: right 0.3s ease-in-out;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.login-right.show {
+    right: 0;
+}
+
+#toggleMenu {
+    position: absolute;
+    left: -40px;
+    top: 50%;
+    padding: 8px;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.2);
+    border: none;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+#toggleMenu:hover {
+    transform: translateY(-50%) scale(1.1);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.menu-divider {
+    width: 90%;
+    height: 1px;
+    background-color: #ddd;
+    margin: 10px auto;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.login-box {
+    flex: 1;
+    max-width: 430px;
+    padding-left: 30px;
+    background-color: #fff;
+    padding: 55px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+.login-box h2 {
+    color: #ff7a45;
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-align: center;
+}
+
+
+.social-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    font-weight: bold;
+    color: #000000;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+.social-button:hover {
+    background-color: #c6c1be;
+}
+
+
+.social-button i {
+    margin-right: 10px;
+    font-size: 18px;
+    vertical-align: middle;
+}
+
+
+.separator {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 14px;
+    color: #777;
+}
+
+
+.login-box label {
+    font-weight: bold;
+    font-size: 120%;
+    display: block;
+    margin-bottom: 5px;
+    color: white;
+}
+
+
+.login-box input[type="email"] {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+
+.login-button {
+    background: linear-gradient(135deg, #FF7A45, #FF4B2B);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+.login-button:hover {
+    background: linear-gradient(135deg, #ee5d6c, #ff3d1f);
+}
+
+
+.signup-text {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: rgb(0, 0, 0);
+}
+
+
+.signup-text a {
+    color: #FF7A45;
+    text-decoration: none;
+}
+
+
+.info-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: center;
+    height: 100%;
+}
+
+
+.info-btn {
+    background-color: #fff;
+    color: #FF7A45;
+    border: 2px solid #FF7A45;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+
+.info-btn:hover {
+    background-color: #FF7A45;
+    color: white;
+}
+
+@media (max-width:768px) {
+    header{
+        padding: 25px 5%;
+        background-color: whitesmoke;
+    }
+
+    .menu-icon{
+        display: block;
+        font-size: 35px;
+        cursor: pointer;
+        position: absolute;
+        right: 40px;
+        top: 30px;
+        color: #FF7A45;
+    }
+    
+    .nav_links{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(20px);
+        position: fixed;
+        top: 90px;
+        right: -100%;
+        width: 100%;
+        height: 100vh;
+        transition: right 0.5s ease;
+        z-index: 9999;
+    }
+
+    .nav_links li {
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+    }
+    
+    .nav_links li a {
+        font-size: 2rem;
+        padding: 12px 0;
+        width: 100%;
+        display: block;
+        color: #333;
+        border: none;
+        border-bottom: 2px solid transparent;
+        transition: all 0.8s ease;
+    }
+    
+    .nav_links li a:hover {
+        color: #FF7A45;
+    }
+    
+
+    .nav_links.active{
+        right: 0;
+    }
+
+    .logo{
+        font-size: 35px;
+    }
+}
+
+@media (max-width: 480px) {
+    footer {
+        padding: 30px 0 20px;
+        font-size: 12px;
+    }
+}

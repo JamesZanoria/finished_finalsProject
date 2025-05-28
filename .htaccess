@@ -1,0 +1,5 @@
+# Prioritize PHP execution over default HTML files
+DirectoryIndex location.php index.php
+
+
+DirectoryIndex index.php

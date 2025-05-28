@@ -12,12 +12,13 @@
 </head>
 <body class="text-gray-800">
 
+    <!-- Navigation Section -->
     <nav class="bg-sky-800 shadow-lg sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
-                <div class="flex items-center">
-                    
-                </div>
+                <div class="flex items-center"></div>
+
+                <!-- Home Page Navigation Section -->
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
                         <a href="#" class="nav-link-custom nav-link-active-custom" data-page="home">Home</a>
@@ -26,6 +27,8 @@
                         <a href="#" class="nav-link-custom" data-page="dashboard">Dashboard</a>
                     </div>
                 </div>
+
+                <!-- Profile Section -->
                 <div class="hidden md:block">
                     <div class="ml-4 flex items-center md:ml-6">
                         <button id="loginModalButton" class="nav-link-custom flex items-center">
@@ -55,6 +58,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- After Home Page - Navigation Section -->
         <div class="md:hidden hidden" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="#" class="nav-link-custom block nav-link-active-custom">Home</a>
@@ -63,8 +68,10 @@
                 <a href="#" class="nav-link-custom block" data-page="dashboard">Dashboard</a>
                 <a href="#" class="nav-link-custom block" data-page="admin">Admin</a>
             </div>
-            <div class="pt-4 pb-3 border-t border-sky-700">
-                <div class="flex items-center px-5">
+        
+        <!-- Login Button Section -->
+        <div class="pt-4 pb-3 border-t border-sky-700">
+            <div class="flex items-center px-5">
                      <button id="loginModalButtonMobile" class="w-full text-left nav-link-custom flex items-center">
                         <i data-lucide="log-in" class="mr-1 lucide-sm"></i> Login
                     </button>
@@ -72,15 +79,30 @@
         </div>
     </nav>
 
+    <!-- Main Section -->
     <main id="mainContent" class="pb-16">
         <section id="home" class="page-section">
-            <div class="gradient-hero text-white py-60 md:py-30" style="background-image:  url(Images/6e20568c-0529-4f4e-b45d-e6e828977bf0-XXX_IMG_WING_OF_AN_AIRPLANE__1_1_0RJT3VN4.JPG.webp);background-size: cover;">
-                
+            <div class="gradient-hero text-white py-20 md:py-40" style="background-image:  url(Images/6e20568c-0529-4f4e-b45d-e6e828977bf0-XXX_IMG_WING_OF_AN_AIRPLANE__1_1_0RJT3VN4.JPG.webp);background-size: cover;">
             </div>
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 md:-mt-24">
                 <div class="card-custom p-6 md:p-10">
-                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-8 text-center">SkyReserve Flights</h2>
+                <div class="flex justify-between items-center gap-6 border-b border-gray-300 pb-2 mb-5">
+                    <!-- Title Section -->
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">SkyReserve Flights</h2>
+
+                    <!-- Trip Selection -->
+                    <div class="custom-select relative flex items-center">
+                        <select name="trips" id="trips" class="input-field-custom pl-10 pr-6" required>
+                            <option value="" disabled>Select your trip</option>
+                            <option value="round-trip" selected>Round-trip</option>
+                        </select>
+                        <i class="bx bx-chevron-down absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                </div>
+
+                    <!-- Form Section -->
                     <form id="bookingForm" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-end">
+                        <!-- Departure Section -->
                         <div>
                             <label for="from" class="form-label-custom">From</label>
                             <div class="relative">
@@ -90,6 +112,8 @@
                                 <input type="text" id="takeOff" name="from" placeholder="Select Departure" class="input-field-custom pl-10" required>
                             </div>
                         </div>
+
+                        <!-- Destination Section -->
                         <div>
                             <label for="to" class="form-label-custom">To</label>
                              <div class="relative">
@@ -99,6 +123,8 @@
                                 <input type="text" id="arrival" name="to" placeholder="Select Destination" class="input-field-custom pl-10" required>
                             </div>
                         </div>
+
+                        <!-- Departure Date Section -->
                         <div>
                             <label for="date" class="form-label-custom">Depart</label>
                             <div class="relative">
@@ -108,6 +134,8 @@
                                 <input type="date" id="departureDate" name="departureDate" class="input-field-custom pl-10" placeholder="Depart" required>
                             </div>
                         </div>
+
+                        <!-- Return Date Section -->
                         <div>
                             <label for="date" class="form-label-custom">Return</label>
                             <div class="relative">
@@ -117,67 +145,89 @@
                                 <input type="date" id="returnDate" name="returnDate" class="input-field-custom pl-10" placeholder="Returning on" required>
                             </div>
                         </div>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label for="passengers" class="form-label-custom">Adults</label>
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <i data-lucide="users" class="text-gray-400 lucide-sm"></i>
-                                    </div>
-                                <input type="number" id="adults" name="adults" value="1" min="1" class="input-field-custom pl-10" required>
+
+                        <!-- Adults Section -->
+                        <div>
+                            <label for="adults" class="form-label-custom">Adults</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+                                    <i data-lucide="users" class="text-gray-400 lucide-sm"></i>
                                 </div>
+                                <input type="number" id="adultCount" name="adults" value="1" min="1" class="input-field-custom pl-10" required>
                             </div>
-                            <div>
-                                <label for="passengers" class="form-label-custom">Children</label>
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <i data-lucide="users" class="text-gray-400 lucide-sm"></i>
-                                    </div>
-                                <input type="number" id="children" name="children" value="0" min="0" class="input-field-custom pl-10" required>
-                                </div>
-                            </div>
-                            <div>
-                                <label for="passengers" class="form-label-custom">Infant</label>
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <i data-lucide="users" class="text-gray-400 lucide-sm"></i>
-                                    </div>
-                                <input type="number" id="infant" name="infant" value="0" min="0" class="input-field-custom pl-10" required>
-                                </div>
-                            </div>
-                             <button type="submit" class="btn-custom btn-primary-custom w-full h-full mt-auto self-end py-[13px]">
-                                <i data-lucide="search" class="inline-block mr-1 lucide-sm"></i> Search
-                            </button>
                         </div>
-                    </form>
-                </div>
+
+                        <!-- Children Section -->
+                        <div>
+                            <label for="children" class="form-label-custom">Children</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+                                    <i data-lucide="users" class="text-gray-400 lucide-sm"></i>
+                                </div>
+                                <input type="number" id="childCount" name="children" value="0" min="0" class="input-field-custom pl-10" required>
+                            </div>
+                        </div>
+
+                        <!-- Infant Section -->
+                        <div>
+                            <label for="infants" class="form-label-custom">Infant</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+                                    <i data-lucide="users" class="text-gray-400 lucide-sm"></i>
+                                </div>
+                                <input type="number" id="infantCount" name="infants" value="0" min="0" class="input-field-custom pl-10" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Search Button -->
+                    <div class="flex justify-center mt-6">
+                        <button type="submit" class="btn-custom btn-primary-custom w-full lg:w-1/2 py-3 flex items-center justify-center">
+                            <i data-lucide="search" class="lucide-sm mr-2"></i> Search Flight
+                        </button>
+                    </div>
+                </form>
             </div>
+        </div>
+    </section>
 
-        </section>
-
+        <!-- Search Result Section -->
         <section id="searchResults" class="page-section hidden p-6 md:p-10">
             <div class="max-w-7xl mx-auto">
                 <h2 class="text-3xl font-bold text-gray-800 mb-8">Flight Results</h2>
                 <div class="flex flex-col lg:flex-row gap-8">
                     <aside class="lg:w-1/4">
                         <div class="card-custom p-6">
+
+                            <!-- Filter Section -->
                             <h3 class="text-xl font-semibold mb-4">Filter Results</h3>
+
+                            <!-- Price Section -->
                             <div class="mb-6">
                                 <label for="priceRange" class="form-label-custom">Price Range</label>
-                                <input type="range" id="priceRange" name="priceRange" min="100" max="2000" step="50" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-sky-600">
+                                
+                                <!-- Price Display -->
                                 <div class="flex justify-between text-sm text-gray-600 mt-1">
-                                    <span>₱1000</span>
-                                    <span>₱50000</span>
+                                    <span id="minPrice">₱1000</span>
+                                    <span id="maxPrice">₱100000</span>
                                 </div>
+
+                                <!-- Slider Input -->
+                                <input type="range" id="priceRange" name="priceRange" min="10000" max="100000" step="100" 
+                                    class="w-full h-2 bg-gray-300 rounded-lg cursor-pointer appearance-none accent-sky-600">
                             </div>
+
+                            <!-- Airlines Section -->
                             <div class="mb-6">
                                 <h4 class="form-label-custom">Airlines</h4>
                                 <div class="space-y-2">
                                     <div><input type="checkbox" id="airline1" class="form-checkbox rounded text-sky-600 mr-2"><label for="airline1">Cebu Pacific</label></div>
-                                    <div><input type="checkbox" id="airline2" class="form-checkbox rounded text-sky-600 mr-2"><label for="airline2">Philppine Airlines</label></div>
-                                    <div><input type="checkbox" id="airline3" class="form-checkbox rounded text-sky-600 mr-2"><label for="airline3">Philppines AirAsia</label></div>
+                                    <div><input type="checkbox" id="airline2" class="form-checkbox rounded text-sky-600 mr-2"><label for="airline2">Philippines Airlines</label></div>
+                                    <div><input type="checkbox" id="airline3" class="form-checkbox rounded text-sky-600 mr-2"><label for="airline3">Philippines AirAsia</label></div>
                                 </div>
                             </div>
+
+                            <!-- Departure Time Section -->
                              <div class="mb-6">
                                 <h4 class="form-label-custom">Departure Time</h4>
                                 <div class="space-y-2">
@@ -186,215 +236,73 @@
                                     <div><input type="checkbox" id="time_evening" class="form-checkbox rounded text-sky-600 mr-2"><label for="time_evening">Evening (6pm-12am)</label></div>
                                 </div>
                             </div>
-                            <button class="btn-custom btn-primary-custom w-full">Apply Filters</button>
+                            <button class="btn-custom btn-primary-custom w-full" id="btn">Apply Filters</button>
                         </div>
                     </aside>
 
+                    <!-- Sorting Section -->
                     <div class="lg:w-3/4">
                         <div class="flex justify-between items-center mb-6">
-                            <p class="text-gray-600">Showing <span class="font-semibold">1-5</span> of <span class="font-semibold">20</span> results</p>
+                            <p class="text-gray-600">
+                                Showing <span class="font-semibold">1-2</span> of 
+                                <select id="travel-type" class="input-field-custom !py-2 !px-3 !w-auto">
+                                    <option value="departure">Departure</option>
+                                    <option value="returning">Returning</option>
+                                </select> 
+                                results
+                            </p>
+
                             <div>
                                 <label for="sortBy" class="sr-only">Sort By</label>
-                                <select id="sortBy" class="input-field-custom !py-2 !px-3 !w-auto"> <option>Sort by: Price (Low to High)</option>
+                                <select id="sortBy" class="input-field-custom !py-2 !px-3 !w-auto"> 
+                                    <option disabled selected>Select to Sort by Price</option>
+                                    <option>Sort by: Price (Low to High)</option>
                                     <option>Sort by: Price (High to Low)</option>
-                                    <option>Sort by: Duration</option>
-                                    <option>Sort by: Departure Time</option>
                                 </select>
                             </div>
                         </div>
 
+                        <!-- Load Sorting Section -->
                         <div id="skeletonLoaderResults" class="space-y-6">
-                            <div class="card-custom p-6 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                                <div class="flex items-center space-x-4">
-                                    <div class="skeleton-custom w-12 h-12 rounded-full"></div>
-                                    <div>
-                                        <div class="skeleton-custom h-4 w-32 mb-2"></div>
-                                        <div class="skeleton-custom h-3 w-24"></div>
+                            <!-- Flight Card Skeleton -->
+                            <template id="skeletonTemplate">
+                                <div class="card-custom p-6 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="skeleton-custom w-12 h-12 rounded-full"></div>
+                                        <div>
+                                            <div class="skeleton-custom h-4 w-32 mb-2"></div>
+                                            <div class="skeleton-custom h-3 w-24"></div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center md:text-left">
+                                        <div class="skeleton-custom h-4 w-20 mb-1"></div>
+                                        <div class="skeleton-custom h-3 w-16"></div>
+                                    </div>
+                                    <div class="text-center md:text-left">
+                                        <div class="skeleton-custom h-4 w-20 mb-1"></div>
+                                        <div class="skeleton-custom h-3 w-16"></div>
+                                    </div>
+                                    <div class="text-center md:text-right">
+                                        <div class="skeleton-custom h-6 w-24 mb-2"></div>
+                                        <div class="skeleton-custom h-8 w-32 rounded-lg"></div>
                                     </div>
                                 </div>
-                                <div class="text-center md:text-left">
-                                    <div class="skeleton-custom h-4 w-20 mb-1"></div>
-                                    <div class="skeleton-custom h-3 w-16"></div>
-                                </div>
-                                <div class="text-center md:text-left">
-                                    <div class="skeleton-custom h-4 w-20 mb-1"></div>
-                                    <div class="skeleton-custom h-3 w-16"></div>
-                                </div>
-                                <div class="text-center md:text-right">
-                                    <div class="skeleton-custom h-6 w-24 mb-2"></div>
-                                    <div class="skeleton-custom h-8 w-32 rounded-lg"></div>
-                                </div>
-                            </div>
-                            <div class="card-custom p-6 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                                <div class="flex items-center space-x-4">
-                                    <div class="skeleton-custom w-12 h-12 rounded-full"></div>
-                                    <div>
-                                        <div class="skeleton-custom h-4 w-32 mb-2"></div>
-                                        <div class="skeleton-custom h-3 w-24"></div>
-                                    </div>
-                                </div>
-                                <div class="text-center md:text-left">
-                                    <div class="skeleton-custom h-4 w-20 mb-1"></div>
-                                    <div class="skeleton-custom h-3 w-16"></div>
-                                </div>
-                                <div class="text-center md:text-left">
-                                    <div class="skeleton-custom h-4 w-20 mb-1"></div>
-                                    <div class="skeleton-custom h-3 w-16"></div>
-                                </div>
-                                <div class="text-center md:text-right">
-                                    <div class="skeleton-custom h-6 w-24 mb-2"></div>
-                                    <div class="skeleton-custom h-8 w-32 rounded-lg"></div>
-                                </div>
-                            </div>
+                            </template>
                         </div>
 
+                        <!-- Flights Section -->
                         <div id="actualFlightResults" class="space-y-6 hidden">
-                            <div class="card-custom hover:shadow-xl transition-shadow">
-                                <div class="p-6 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                                    <div class="flex items-center space-x-4">
-                                        <img src="https://placehold.co/48x48/0EA5E9/FFFFFF?text=AL" alt="Airline Logo" class="rounded-full">
-                                        <div>
-                                            <h4 class="font-semibold text-lg">Cebu Pacific</h4>
-                                            <p class="text-sm text-gray-500">CP 205</p>
-                                        </div>
-                                    </div>
-                                    <div class="text-center md:text-left">
-                                        <p class="font-medium">08:00 AM</p>
-                                        <p class="text-sm text-gray-500">Cebu City(CEB)</p>
-                                    </div>
-                                    <div class="text-center md:text-left">
-                                        <p class="font-medium">10:30 AM</p>
-                                        <p class="text-sm text-gray-500">USA (US)</p>
-                                    </div>
-                                    <div class="text-center md:text-right">
-                                        <p class="text-2xl font-bold text-sky-600">₱22,067</p>
-                                        <button class="btn-custom btn-primary-custom !text-sm mt-2 !px-4 !py-2" data-page="booking">Select Flight</button> </div>
-                                </div>
-                                <div class="bg-gray-50 px-6 py-3 border-t text-sm text-gray-600">
-                                    2h 30m duration | Non-stop
-                                </div>
-                            </div>
-
-
-                             <div class="card-custom hover:shadow-xl transition-shadow">
-                                <div class="p-6 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                                    <div class="flex items-center space-x-4">
-                                        <img src="https://placehold.co/48x48/EC4899/FFFFFF?text=SH" alt="Airline Logo" class="rounded-full">
-                                        <div>
-                                            <h4 class="font-semibold text-lg">Philppines Airlines</h4>
-                                            <p class="text-sm text-gray-500">PA 712</p>
-                                        </div>
-                                    </div>
-                                    <div class="text-center md:text-left">
-                                        <p class="font-medium">09:15 AM</p>
-                                        <p class="text-sm text-gray-500">Japan (JPN)</p>
-                                    </div>
-                                    <div class="text-center md:text-left">
-                                        <p class="font-medium">12:00 PM</p>
-                                        <p class="text-sm text-gray-500">China (CN)</p>
-                                    </div>
-                                    <div class="text-center md:text-right">
-                                        <p class="text-2xl font-bold text-sky-600">₱35,145</p>
-                                         <button class="btn-custom btn-primary-custom !text-sm mt-2 !px-4 !py-2" data-page="booking">Select Flight</button> </div>
-                                </div>
-                                <div class="bg-gray-50 px-6 py-3 border-t text-sm text-gray-600">
-                                    1h 20 duration | Non-stop
-                                </div>
-                            </div>
-
-
-                            <div class="card-custom hover:shadow-xl transition-shadow">
-                                <div class="p-6 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                                    <div class="flex items-center space-x-4">
-                                        <img src="https://placehold.co/48x48/EC4899/FFFFFF?text=SH" alt="Airline Logo" class="rounded-full">
-                                        <div>
-                                            <h4 class="font-semibold text-lg">Philppines AirAsia</h4>
-                                            <p class="text-sm text-gray-500">PAA 625</p>
-                                        </div>
-                                    </div>
-                                    <div class="text-center md:text-left">
-                                        <p class="font-medium">09:15 AM</p>
-                                        <p class="text-sm text-gray-500">China (CN)</p>
-                                    </div>
-                                    <div class="text-center md:text-left">
-                                        <p class="font-medium">12:00 PM</p>
-                                        <p class="text-sm text-gray-500">Australia (AU)</p>
-                                    </div>
-                                    <div class="text-center md:text-right">
-                                        <p class="text-2xl font-bold text-sky-600">₱28,696</p>
-                                         <button class="btn-custom btn-primary-custom !text-sm mt-2 !px-4 !py-2" data-page="booking">Select Flight</button> </div>
-                                </div>
-                                <div class="bg-gray-50 px-6 py-3 border-t text-sm text-gray-600">
-                                    2h 45m duration | Non-stop
-                                </div>
-                            </div>
-                            
-
-                                <div class="card-custom hover:shadow-xl transition-shadow">
-                                <div class="p-6 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                                    <div class="flex items-center space-x-4">
-                                        <img src="https://placehold.co/48x48/0EA5E9/FFFFFF?text=AL" alt="Airline Logo" class="rounded-full">
-                                        <div>
-                                            <h4 class="font-semibold text-lg">Cebu Pacific</h4>
-                                            <p class="text-sm text-gray-500">CP 205</p>
-                                        </div>
-                                    </div>
-                                    <div class="text-center md:text-left">
-                                        <p class="font-medium">08:00 AM</p>
-                                        <p class="text-sm text-gray-500">Cebu City(CEB)</p>
-                                    </div>
-                                    <div class="text-center md:text-left">
-                                        <p class="font-medium">10:30 AM</p>
-                                        <p class="text-sm text-gray-500">Manila (MNL)</p>
-                                    </div>
-                                    <div class="text-center md:text-right">
-                                        <p class="text-2xl font-bold text-sky-600">₱5,069</p>
-                                        <button class="btn-custom btn-primary-custom !text-sm mt-2 !px-4 !py-2" data-page="booking">Select Flight</button> </div>
-                                </div>
-                                <div class="bg-gray-50 px-6 py-3 border-t text-sm text-gray-600">
-                                    1h 15m duration | Non-stop
-                                </div>
-                            </div>
-
-
-                            <div class="card-custom hover:shadow-xl transition-shadow">
-                                <div class="p-6 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                                    <div class="flex items-center space-x-4">
-                                        <img src="https://placehold.co/48x48/0EA5E9/FFFFFF?text=AL" alt="Airline Logo" class="rounded-full">
-                                        <div>
-                                            <h4 class="font-semibold text-lg">Philppines Airlines</h4>
-                                            <p class="text-sm text-gray-500">PA 205</p>
-                                        </div>
-                                    </div>
-                                    <div class="text-center md:text-left">
-                                        <p class="font-medium">08:00 AM</p>
-                                        <p class="text-sm text-gray-500">Manila (MNL)</p>
-                                    </div>
-                                    <div class="text-center md:text-left">
-                                        <p class="font-medium">10:30 AM</p>
-                                        <p class="text-sm text-gray-500">Japan (JPN)</p>
-                                    </div>
-                                    <div class="text-center md:text-right">
-                                        <p class="text-2xl font-bold text-sky-600">₱21,699</p>
-                                        <button class="btn-custom btn-primary-custom !text-sm mt-2 !px-4 !py-2" data-page="booking">Select Flight</button> </div>
-                                </div>
-                                <div class="bg-gray-50 px-6 py-3 border-t text-sm text-gray-600">
-                                    1h 30m duration | Non-stop
-                                </div>
-                            </div>
+                                <!-- Display Flights -->
                         </div>
 
+                        <!-- Navigate through Flights Section -->
                         <nav class="mt-8 flex justify-center items-center space-x-2" aria-label="Pagination">
-                            <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                            <a href="#" onclick="changePage('prev')" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                                 <span class="sr-only">Previous</span>
                                 <i data-lucide="chevron-left" class="h-5 w-5"></i>
                             </a>
-                            <a href="#" aria-current="page" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-sky-50 text-sm font-medium text-sky-600 z-10">1</a>
-                            <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">2</a>
-                            <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 hidden md:inline-flex">3</a>
-                            <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">...</span>
-                            <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">8</a>
-                            <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                            <span id="current-page" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-sky-50 text-sm font-medium text-sky-600 z-10">1</span>
+                            <a href="#" onclick="changePage('next')" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                                 <span class="sr-only">Next</span>
                                 <i data-lucide="chevron-right" class="h-5 w-5"></i>
                             </a>
@@ -404,6 +312,7 @@
             </div>
         </section>
 
+        <!-- Booking Section -->
         <section id="booking" class="page-section hidden p-6 md:p-10">
             <div class="max-w-6xl mx-auto">
                 <h2 class="text-3xl font-bold text-gray-800 mb-8">Complete Your Booking</h2>
@@ -411,28 +320,31 @@
                     <div class="lg:col-span-2 space-y-8">
                         <div class="card-custom p-6 md:p-8">
                             <h3 class="text-xl font-semibold mb-6">Passenger Details</h3>
+
+                            <!-- Booking Form Section -->
                             <form class="space-y-6">
                                 <div class="grid md:grid-cols-2 gap-6">
                                     <div>
                                         <label for="firstName" class="form-label-custom">First Name</label>
-                                        <input type="text" id="firstName" class="input-field-custom" placeholder="John">
+                                        <input type="text" id="firstName" class="input-field-custom" placeholder="John" required>
                                     </div>
                                     <div>
                                         <label for="lastName" class="form-label-custom">Last Name</label>
-                                        <input type="text" id="lastName" class="input-field-custom" placeholder="Doe">
+                                        <input type="text" id="lastName" class="input-field-custom" placeholder="Doe" required>
                                     </div>
                                 </div>
                                 <div>
                                     <label for="email" class="form-label-custom">Email Address</label>
-                                    <input type="email" id="email" class="input-field-custom" placeholder="john.doe@example.com">
+                                    <input type="email" id="email" class="input-field-custom" placeholder="john.doe@example.com" required>
                                 </div>
                                 <div>
                                     <label for="phone" class="form-label-custom">Phone Number</label>
-                                    <input type="tel" id="phone" class="input-field-custom" placeholder="+1 234 567 8900">
+                                    <input type="tel" id="phone" class="input-field-custom" placeholder="+1 234 567 8900" required>
                                 </div>
                             </form>
                         </div>
 
+                        <!-- Booking Seat Section -->
                         <div class="card-custom p-6 md:p-8">
                             <h3 class="text-xl font-semibold mb-6">Select Your Seat</h3>
                             <div class="bg-gray-100 p-4 rounded-lg mb-4 text-center text-sm text-gray-600">
@@ -464,39 +376,40 @@
                         </div>
                     </div>
 
+                    <!-- Booking Summary Section -->
                     <aside class="lg:col-span-1">
                         <div class="card-custom p-6 md:p-8 sticky top-24">
                             <h3 class="text-xl font-semibold mb-6 border-b pb-3">Booking Summary</h3>
-                            <div class="space-y-3 mb-6">
+                            <div class="space-y-3 mb-6" id="flight-details">
                                 <div class="flex justify-between">
-                                    <span class="text-gray-600">Flight: CP 205</span>
-                                    <span class="font-medium">CEB <i data-lucide="arrow-right" class="inline-block lucide-sm"></i> MNL</span>
+                                    <span class="text-gray-600">Flight:</span>
+                                    <span class="font-medium" id="dep-to-arr"></span>
                                 </div>
                                 <div class="flex justify-between">
                                     <span class="text-gray-600">Date:</span>
-                                    <span class="font-medium">Oct 28, 2025</span>
+                                    <span class="font-medium" id="depd-to-retd"></span>
                                 </div>
                                 <div class="flex justify-between">
                                     <span class="text-gray-600">Passengers:</span>
-                                    <span class="font-medium">1 Adult</span>
+                                    <span class="font-medium" id="passengers"></span>
                                 </div>
                                 <div class="flex justify-between">
                                     <span class="text-gray-600">Selected Seat:</span>
                                     <span class="font-medium" id="selectedSeatDisplay">1E</span>
                                 </div>
                             </div>
-                            <div class="border-t pt-4 space-y-3">
+                            <div class="border-t pt-4 space-y-3" id="price-details">
                                 <div class="flex justify-between">
                                     <span class="text-gray-600">Subtotal:</span>
-                                    <span class="font-medium">₱5069.00</span>
+                                    <span class="font-medium" id="sub-total"></span>
                                 </div>
                                 <div class="flex justify-between">
                                     <span class="text-gray-600">Taxes & Fees:</span>
-                                    <span class="font-medium">₱1068.50</span>
+                                    <span class="font-medium" id="taxes-and-fees"></span>
                                 </div>
                                 <div class="flex justify-between text-xl font-bold text-sky-700">
                                     <span>Total:</span>
-                                    <span>₱6,137.50</span>
+                                    <span id="totalPrice"></span>
                                 </div>
                             </div>
                             <button id="confirmBookingButton" class="btn-custom btn-primary-custom w-full mt-8">
@@ -508,47 +421,70 @@
             </div>
         </section>
 
-        <section id="dashboard" class="page-section hidden p-6 md:p-10">
-            <div class="max-w-7xl mx-auto">
-                <h2 class="text-3xl font-bold text-gray-800 mb-8">User Dashboard</h2>
-                <div class="grid lg:grid-cols-4 gap-8">
-                   
-                    <div class="lg:col-span-3">
-                        <div id="upcomingBookingsContent" class="dashboard-content card-custom p-6 md:p-8">
-                            <h3 class="text-2xl font-semibold mb-6">Upcoming Bookings</h3>
-                            <div class="space-y-6">
-                                <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
-                                    <div class="flex justify-between items-start">
-                                        <div>
-                                            <p class="text-lg font-semibold text-sky-700">Cebu City (CEB ) <i data-lucide="arrow-right" class="inline-block lucide-sm"></i> Manila (MNL)</p>
-                                            <p class="text-sm text-gray-500">Flight CP 205 | Oct 28, 2025 - 08:00 AM</p>
-                                        </div>
-                                        <span class="text-sm bg-green-100 text-green-700 px-3 py-1 rounded-full font-medium">Confirmed</span>
-                                    </div>
-                                    <div class="mt-4 flex space-x-4">
-                                        <button class="btn-custom btn-secondary-custom !px-3 !py-1 !text-sm"><i data-lucide="eye" class="inline-block mr-1 lucide-sm"></i> View Details</button>
-                                        <button class="btn-custom btn-secondary-custom !px-3 !py-1 !text-sm"><i data-lucide="edit-3" class="inline-block mr-1 lucide-sm"></i> Modify</button>
-                                    </div>
-                                </div>
-                                </div>
-                        </div>
-                        <div id="bookingHistoryContent" class="dashboard-content card-custom p-6 md:p-8 hidden">
-                            <h3 class="text-2xl font-semibold mb-6">Booking History</h3>
-                             <p class="text-gray-600">No past bookings found.</p>
-                        </div>
-                        <div id="profileSettingsContent" class="dashboard-content card-custom p-6 md:p-8 hidden">
-                            <h3 class="text-2xl font-semibold mb-6">Profile Settings</h3>
-                            <form class="space-y-6">
-                               <p class="text-gray-600">Profile editing form will be here. (e.g., Name, Email, Password change)</p>
-                                <button type="submit" class="btn-custom btn-primary-custom">Save Changes</button>
-                            </form>
-                        </div>
+        
+<!-- Dashboard Section -->
+<section id="dashboard" class="page-section hidden p-8 md:p-12 bg-gray-100 min-h-screen">
+    <div class="max-w-7xl mx-auto">
+        <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">User Dashboard</h2>
+        <div class="grid lg:grid-cols-3 gap-10">
+            <div class="lg:col-span-2 space-y-8">
+                <div id="upcomingBookingsContent" class="bg-white p-6 md:p-8 shadow-xl rounded-lg border border-gray-300">
+                    <h3 class="text-2xl font-semibold mb-6 text-blue-600">Upcoming Bookings</h3>
+                    <div id="dashboard-results">
+                        <!-- Booking details will be populated dynamically -->
                     </div>
                 </div>
-            </div>
-        </section>
+                <div class="flex justify-between">
 
-        
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modify Booking Modal -->
+<div id="modifyBookingModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white rounded-lg shadow-xl p-8 w-full max-w-lg">
+        <h3 class="text-2xl font-semibold text-blue-600 mb-6 text-center">Modify Booking</h3>
+        <form id="modifyForm" class="space-y-6">
+            <label class="block text-gray-700 font-medium">Departure:</label>
+            <select id="modDeparture" class="w-full px-4 py-3 border rounded-lg bg-gray-100 focus:ring focus:ring-blue-500" required>
+                <option value="Philippines">Philippines</option>
+                <option value="Japan">Japan</option>
+                <option value="United States">United States</option>
+                <option value="China">China</option>
+                <option value="France">France</option>
+            </select>
+
+            <label class="block text-gray-700 font-medium">Destination:</label>
+            <select id="modDestination" class="w-full px-4 py-3 border rounded-lg bg-gray-100 focus:ring focus:ring-blue-500" required>
+                <option value="Japan">Japan</option>
+                <option value="United States">United States</option>
+                <option value="China">China</option>
+                <option value="France">France</option>
+                <option value="Philippines">Philippines</option>
+            </select>
+
+            <label class="block text-gray-700 font-medium">Departure Date:</label>
+            <input type="text" id="modDepartureDate" class="w-full px-4 py-3 border rounded-lg bg-gray-100 focus:ring focus:ring-blue-500" required>
+
+            <label class="block text-gray-700 font-medium">Return Date:</label>
+            <input type="text" id="modReturnDate" class="w-full px-4 py-3 border rounded-lg bg-gray-100 focus:ring focus:ring-blue-500" required>
+
+            <label class="block text-gray-700 font-medium">Flight Code:</label>
+            <input type="text" id="modFlightCode" class="w-full px-4 py-3 border rounded-lg bg-gray-100 focus:ring focus:ring-blue-500" required>
+
+            <div class="flex justify-between mt-8">
+                <button type="submit" class="px-6 py-3 font-semibold bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
+                    Save Changes
+                </button>
+                <button type="button" id="closeModifyModal" class="px-6 py-3 font-semibold bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition">
+                    Cancel
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
     </main>
 
 
@@ -594,281 +530,90 @@
     <script src="confirmation.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const today = new Date();
-        
-            flatpickr("#departureDate", {
-              dateFormat: "d M Y",
-              defaultDate: today,
-              minDate: departureDate
-          });
-            
-            
-            flatpickr("#departureDate, #returnDate", {
-              mode: "range",
-              dateFormat: "d M Y",
-              minDate: today,
-              showMonths: 2,
-              onOpen: function(selectedDates, dateStr, instance) {
-                const calendarContainer = instance.calendarContainer;
-                calendarContainer.classList.add("dual-calendar");
-              },
-              onChange: function(selectedDates) {
-                if (selectedDates.length === 2) {
-                  const [depart, ret] = selectedDates;
-        
-                  document.getElementById("departureDate").value = depart.toLocaleDateString("en-GB", {
-                    day: "2-digit",
-                    month: "short",
-                    year: "numeric"
-                  });
-        
-                  document.getElementById("returnDate").value = ret.toLocaleDateString("en-GB", {
-                    day: "2-digit",
-                    month: "short",
-                    year: "numeric"
-                  });
-                }
-              }
-            });
-          });
-
     document.addEventListener("DOMContentLoaded", () => {
-        console.log("🔍 Initializing flight search...");
-        setupLoadingAnimation();
-        populateLocations();
-        setupBookingSubmission();
-    });
+        const today = new Date();
 
-
-    function setupLoadingAnimation() {
-      const loadingOverlay = document.createElement("div");
-      loadingOverlay.id = "loadingOverlay";
-      loadingOverlay.style.display = "none";
-      loadingOverlay.innerHTML = "<p>🔄 Searching for flights...</p>";
-      document.body.appendChild(loadingOverlay);
-    }
-
-    function showLoading() {
-      document.getElementById("loadingOverlay").style.display = "block";
-    }
-
-    function hideLoading() {
-      document.getElementById("loadingOverlay").style.display = "none";
-    }
-
-    function populateLocations() {
-      const departureSelect = document.getElementById("takeOff");
-      const destinationSelect = document.getElementById("arrival");
-      const apiUrl = "https://test-flight2.azurewebsites.net/api/GetLocations";
-
-      fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-          if (!data || !Array.isArray(data.locations)) throw new Error("No locations available.");
-
-          populateDropdown(departureSelect, data.locations, "Select Departure");
-          populateDropdown(destinationSelect, data.locations, "Select Destination");
-        })
-        .catch(error => {
-          console.error("❌ Error fetching locations:", error);
-          departureSelect.innerHTML = "<option>⚠ Error loading locations</option>";
-          destinationSelect.innerHTML = "<option>⚠ Error loading locations</option>";
-        });
-    }
-
-    function populateDropdown(selectElement, options, placeholder) {
-      selectElement.innerHTML = `<option value="" disabled selected>${placeholder}</option>`;
-      options.forEach(location => {
-        const option = document.createElement("option");
-        option.value = location;
-        option.textContent = location;
-        selectElement.appendChild(option);
-      });
-    }
-
-    function setupBookingSubmission() {
-    const bookingForm = document.getElementById("bookingForm");
-
-    if (!bookingForm) {
-        console.error("❌ Booking form not found.");
-        return;
-    }
-
-    bookingForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-        showLoading();
-
-        const departure = document.getElementById("takeOff").value;
-        const destination = document.getElementById("arrival").value;
-
-        if (!departure || !destination) {
-            alert("⚠ Please select both departure and destination.");
-            hideLoading();
-            return;
-        }
-
-        fetchFlightData(departure, destination);
-    });
-  }
-
-    function fetchFlightData(departure, destination) {
-      const apiUrl = `https://test-flight2.azurewebsites.net/api/FlightSearch?departure=${encodeURIComponent(departure)}&destination=${encodeURIComponent(destination)}`;
-
-      document.addEventListener("DOMContentLoaded", () => {
-            console.log("🔍 Initializing flight search...");
-            populateLocations();
-            setupBookingSubmission();
-        });
-
-      function setupLoadingAnimation() {
-        const loadingOverlay = document.createElement("div");
-        loadingOverlay.id = "loadingOverlay";
-        loadingOverlay.style.display = "none";
-        loadingOverlay.innerHTML = "<p>🔄 Searching for flights...</p>";
-        document.body.appendChild(loadingOverlay);
-      }
-
-      function showLoading() {
-        document.getElementById("loadingOverlay").style.display = "block";
-      }
-
-      function hideLoading() {
-        document.getElementById("loadingOverlay").style.display = "none";
-      }
-
-      function populateLocations() {
-            const departureSelect = document.getElementById("takeOff");
-            const destinationSelect = document.getElementById("arrival");
-            const apiUrl = "https://test-flight2.azurewebsites.net/api/GetLocations";
-
-            fetch(apiUrl)
-                .then(response => response.json())
-                .then(data => {
-                    console.log("🌍 API Response:", data);
-                    if (!data || !Array.isArray(data.locations)) throw new Error("No locations available.");
-
-                    populateDropdown(departureSelect, data.locations, "Select Departure");
-                    populateDropdown(destinationSelect, data.locations, "Select Destination");
-                })
-                .catch(error => {
-                    console.error("❌ Error fetching locations:", error);
-                    departureSelect.innerHTML = "<option>⚠ Error loading locations</option>";
-                    destinationSelect.innerHTML = "<option>⚠ Error loading locations</option>";
-                });
-        }
-
-      function populateDropdown(selectElement, options, placeholder) {
-            selectElement.innerHTML = `<option value="" disabled selected>${placeholder}</option>`;
-            options.forEach(location => {
-                const option = document.createElement("option");
-                option.value = location;
-                option.textContent = location;
-                selectElement.appendChild(option);
-            });
-        }
-
-      function setupBookingSubmission() {
-            const bookingForm = document.getElementById("bookingForm");
-
-            if (!bookingForm) {
-                console.error("❌ Booking form not found.");
-                return;
-            }
-
-            bookingForm.addEventListener("submit", function (event) {
-                event.preventDefault();
-                showLoading();
-
-                const departure = document.getElementById("takeOff").value;
-                const destination = document.getElementById("arrival").value;
-
-                if (!departure || !destination) {
-                    alert("⚠ Please select both departure and destination.");
-                    hideLoading();
-                    return;
-                }
-
-                fetchFlightData(departure, destination);
-            });
-        }
-
-      function fetchFlightData(departure, destination) {
-            const apiUrl = `https://test-flight2.azurewebsites.net/api/FlightSearch?departure=${encodeURIComponent(departure)}&destination=${encodeURIComponent(destination)}`;
-            
-            console.log("🚀 Fetching flight data:", apiUrl);
-
-            fetch(apiUrl)
-                .then(response => {
-                    console.log("📡 API Response Status:", response.status, response.statusText);
-                    if (!response.ok) throw new Error(`HTTP Error: ${response.status} - ${response.statusText}`);
-                    return response.text();
-                })
-                .then(text => {
-                    console.log("🔍 Raw API Response:", text || "⚠ Empty response");
-                    return text.trim() ? JSON.parse(text) : { results: [] };
-                })
-                .then(data => {
-                    hideLoading();
-                    if (!data.results || data.results.length === 0) {
-                        console.warn("⚠ No flights found.");
-                        document.getElementById("results").innerHTML = "<p>⚠ No flights found. Try adjusting your search criteria.</p>";
-                        return;
+        // Initialize departure date picker (dual-calendar but single selection display)
+        const departurePicker = flatpickr("#departureDate", {
+            dateFormat: "d M Y",
+            defaultDate: today,
+            minDate: today,
+            showMonths: 2, // Displays May & June side by side
+            mode: "range", // Enables range selection but modifies input display
+            onOpen: function (selectedDates, dateStr, instance) {
+                try {
+                    const calendarContainer = instance.calendarContainer;
+                    if (calendarContainer) {
+                        calendarContainer.classList.add("dual-calendar"); // Styling only for departure picker
                     }
-                    displayFlightResults(data.results);
-                })
-                .catch(error => {
-                    console.error("❌ API Fetch Error:", error);
-                    document.getElementById("results").innerHTML = `<p>⚠ Unable to fetch flights. Check API availability.</p>`;
-                    hideLoading();
-                });
-        }
+                } catch (error) {
+                    console.warn("Flatpickr styling error:", error);
+                }
+            },
+            onChange: function (selectedDates) {
+                if (selectedDates.length > 0) {
+                    const departDate = selectedDates[0];
 
-        function displayFlightResults(flights) {
-            const resultsContainer = document.getElementById("results");
-            resultsContainer.innerHTML = "";
+                    // Ensure return date starts in June while staying empty initially
+                    returnPicker.set("minDate", departDate);
 
-            if (!flights || flights.length === 0) {
-                resultsContainer.innerHTML = "<p>No flights found. Please try another search.</p>";
-                return;
-            }
+                    // Show only departure date in input (not full range)
+                    departurePicker.input.value = flatpickr.formatDate(departDate, "d M Y");
 
-            flights.forEach(flight => {
-                const flightElement = document.createElement("div");
-                flightElement.className = "flight-card";
-                flightElement.innerHTML = `
-                    <h3>${flight.airline} - ${flight.flightNumber}</h3>
-                    <p><strong>From:</strong> ${flight.from} → <strong>To:</strong> ${flight.to}</p>
-                    <p><strong>Price:</strong> ${flight.price} PHP</p>
-                    <p><strong>Departure:</strong> ${new Date(flight.departureTime).toLocaleString()}</p>
-                    <p><strong>Arrival:</strong> ${new Date(flight.arrivalTime).toLocaleString()}</p>
-                    <button onclick="confirmBooking('${flight.id}')">Confirm Booking</button>
-                `;
-                resultsContainer.appendChild(flightElement);
-            });
-        }
-    }
-
-        document.addEventListener("DOMContentLoaded", function () {
-            console.log("🛫 Retrieving stored flight details...");
-
-            function applyStoredValue(id, key) {
-                const element = document.getElementById(id);
-                const value = localStorage.getItem(key);
-
-                if (element) {
-                    element.textContent = value ? value : "Not provided"; // Prevent missing values
-                    console.log(`✅ Set ${id}: ${value}`);
-                } else {
-                    console.warn(`⚠ Element with ID '${id}' not found in confirmation.html`);
+                    // Update the return field ONLY when both dates are selected
+                    if (selectedDates.length === 2) {
+                        document.getElementById("returnDate").value = flatpickr.formatDate(selectedDates[1], "d M Y");
+                    } else {
+                        document.getElementById("returnDate").value = "";
+                    }
                 }
             }
-
-            applyStoredValue("takeOff", "takeOff");
-            applyStoredValue("arrival", "arrival");
-            applyStoredValue("departureDate", "departureDate");
-            applyStoredValue("returnDate", "returnDate");
         });
+
+        // Initialize return date input (neutral, waits for user selection)
+        const returnPicker = flatpickr("#returnDate", {
+            dateFormat: "d M Y",
+            minDate: today, // Updates dynamically but stays independent
+            defaultDate: null, // Keeps field empty until user selects
+        });
+    });
+
+    // Retrieve data from index.html
+    document.addEventListener("DOMContentLoaded", function () {
+        const params = new URLSearchParams(window.location.search);
+
+        // Retrieve data
+        const from = params.get("from") || localStorage.getItem("from") || "";
+        const to = params.get("to") || localStorage.getItem("to") || "";
+        const departureDate = params.get("departureDate") || localStorage.getItem("departureDate") || "";
+        const returnDate = params.get("returnDate") || localStorage.getItem("returnDate") || "";
+
+        // Populate form fields
+        document.getElementById("takeOff").value = from;
+        document.getElementById("arrival").value = to;
+        document.getElementById("departureDate").value = departureDate;
+        document.getElementById("returnDate").value = returnDate;
+
+        // Log confirmation in console
+        console.log("Data successfully retrieved for confirmation:");
+        console.log("From:", from);
+        console.log("To:", to);
+        console.log("Departure Date:", departureDate);
+        console.log("Return Date:", returnDate);
+    });
+
+    document.getElementById("priceRange").addEventListener("input", function () {
+        document.getElementById("minPrice").textContent = `₱${this.value}`;
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const skeletonContainer = document.getElementById("skeletonLoaderResults");
+        const skeletonTemplate = document.getElementById("skeletonTemplate").content;
+        
+        for (let i = 0; i < 6; i++) { // Generates 6 skeletons dynamically
+            skeletonContainer.appendChild(skeletonTemplate.cloneNode(true));
+        }
+    });
     </script>
 </body>
 </html>
