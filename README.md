@@ -1,14 +1,14 @@
-# ✈️ SkyReverse Airlines Website 🌐
+# ✈️ SkyReserve Airlines Website 🌐
 
-Welcome aboard! This is our group project: the official website for **SkyReverse Airlines** — your future-ready, stylish airline! 🛫🌤️
+Welcome aboard! This is our group project: the official website for **SkyReserve Airlines** — your future-ready, stylish airline! 🛫🌤️
 
 ---
 
 ## 📄 About the Project
 
-**SkyReverse** is a static airline website made as part of a school project. It offers a clean, user-friendly interface for airline information and mock bookings. The site includes:
+**SkyReserve** is a static airline website made as part of a school project. It offers a clean, user-friendly interface for airline information and mock bookings. The site includes:
 
-- 🏠 A homepage introducing SkyReverse Airlines
+- 🏠 A homepage introducing SkyReserve Airlines
 - 📅 Flight schedules and travel details
 - 🧾 A booking form (demo only)
 - 📞 Contact and support page
@@ -16,11 +16,12 @@ Welcome aboard! This is our group project: the official website for **SkyReverse
 
 ---
 
-## 💻 Technologies Used
+## 💻 Languages Used
 
 - HTML5 🧱  
 - CSS3 🎨  
-- Java 🧩 *(for additional features or logic if implemented)*
+- Javascript 🧩 *(for additional features or logic if implemented)*
+- PHP
 
 ---
 
@@ -43,22 +44,6 @@ Welcome aboard! This is our group project: the official website for **SkyReverse
 
 ---
 
-## 📁 Folder Structure
-
-/skyreverse
-├── index.html
-├── about.html
-├── booking.html
-├── contact.html
-├── style.css
-├── scripts/
-└── images/
-
-
-
-
----
-
 ## 🎯 Features
 
 - ✅ Responsive layout (adapts to different screen sizes)
@@ -66,7 +51,6 @@ Welcome aboard! This is our group project: the official website for **SkyReverse
 - ✅ Interactive mock booking form
 - ✅ Custom airline theme and branding
 - ✅ Informative flight schedule section
-- ✅ Contact form for user messages
 
 ---
 
@@ -86,7 +70,7 @@ Welcome aboard! This is our group project: the official website for **SkyReverse
 
 ---
 
-## 🙌 Thank You for Visiting SkyReverse Airlines!
+## 🙌 Thank You for Visiting SkyReserve Airlines!
 
 Bon voyage! 🧳✈️🌈  
 We hope you enjoyed the journey. Feel free to explore the code, learn from it, or share it with others!
