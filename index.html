@@ -52,26 +52,36 @@
           </div>
 
           <div class="input-group">
-            <!-- Departure Section -->
-            <div class="input-wrapper">
-              <label for="takeOff" class="input-label">From</label>
-              <select id="takeOff" required>
-                <option value="" disabled selected>Select departure</option>
-              </select>
-            </div>
+                  <!-- Departure Section -->
+                  <div class="input-wrapper">
+                      <label for="takeOff" class="input-label">From</label>
+                      <select id="takeOff" required>
+                          <option value="" disabled selected>Select Departure</option>
+                          <option value="Philippines">Philippines</option>
+                          <option value="Japan">Japan</option>
+                          <option value="France">France</option>
+                          <option value="China">China</option>
+                          <option value="United States">United States</option>
+                      </select>
+                  </div>
 
-            <div class="icon">
-              <i class='bx bxs-plane-alt'></i>
-            </div>
+                  <div class="icon">
+                      <i class='bx bxs-plane-alt'></i>
+                  </div>
 
-            <!-- Destination Section -->
-            <div class="input-wrapper">
-              <label for="arrival" class="input-label">To</label>
-              <select id="arrival" required>
-                <option value="" disabled selected>Select Destination</option>
-              </select>
-            </div>
-          </div>
+                  <!-- Destination Section -->
+                  <div class="input-wrapper">
+                      <label for="arrival" class="input-label">To</label>
+                      <select id="arrival" required>
+                          <option value="" disabled selected>Select Destination</option>
+                          <option value="Philippines">Philippines</option>
+                          <option value="Japan">Japan</option>
+                          <option value="France">France</option>
+                          <option value="China">China</option>
+                          <option value="United States">United States</option>
+                      </select>
+                  </div>
+              </div>
 
           <div class="input-group">
             <!-- Departure Date Section -->
@@ -254,8 +264,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     console.log("🔍 Initializing flight search...");
     setupLoadingAnimation();
-    populateLocations();
-    setupBookingSubmission();
 });
 
 // 🔄 Setup Loading Animation Once
@@ -273,124 +281,6 @@ function showLoading() {
 
 function hideLoading() {
     document.getElementById("loadingOverlay").style.display = "none";
-}
-
-// 🌍 Fetch Locations from PHP instead of Azure
-function populateLocations() {
-    const departureSelect = document.getElementById("takeOff");
-    const destinationSelect = document.getElementById("arrival");
-    const apiUrl = "http://localhost:5500/location.php"; // ✅ PHP API call
-
-    fetch(apiUrl)
-        .then(response => {
-            console.log("📡 Locations API Response:", response.status, response.statusText);
-            if (!response.ok) throw new Error(`HTTP Error ${response.status}`);
-            return response.json();
-        })
-        .then(data => {
-            console.log("🌍 Locations Data:", data);
-            if (!data.locations || !Array.isArray(data.locations)) throw new Error("No locations found.");
-            populateDropdown(departureSelect, data.locations, "Select Departure");
-            populateDropdown(destinationSelect, data.locations, "Select Destination");
-        })
-        .catch(error => {
-            console.error("❌ Error fetching locations:", error);
-            departureSelect.innerHTML = "<option>⚠ Error loading locations</option>";
-            destinationSelect.innerHTML = "<option>⚠ Error loading locations</option>";
-        });
-}
-
-function populateDropdown(dropdown, locations, defaultText) {
-    dropdown.innerHTML = `<option disabled selected>${defaultText}</option>`;
-    locations.forEach(location => {
-        const option = document.createElement("option");
-        option.value = location;
-        option.textContent = location;
-        dropdown.appendChild(option);
-    });
-}
-
-// ✈️ Setup Booking Submission
-function setupBookingSubmission() {
-    const bookingForm = document.getElementById("bookingForm");
-
-    if (!bookingForm) {
-        console.error("❌ Booking form not found.");
-        return;
-    }
-
-    bookingForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-        showLoading();
-
-        const departure = document.getElementById("takeOff").value;
-        const destination = document.getElementById("arrival").value;
-
-        if (!departure || !destination) {
-            alert("⚠ Please select both departure and destination.");
-            hideLoading();
-            return;
-        }
-
-        fetchFlightData(departure, destination);
-    });
-}
-
-// ✈️ Fetch Flight Data from PHP Instead of Azure
-function fetchFlightData(departure, destination) {
-    const apiUrl = `http://localhost:5000/flights.php?departure=${encodeURIComponent(departure)}&destination=${encodeURIComponent(destination)}`; // ✅ PHP API Integration
-
-    console.log("🚀 Fetching flight data:", apiUrl);
-
-    fetch(apiUrl)
-        .then(response => {
-            console.log("📡 API Response Status:", response.status, response.statusText);
-            if (!response.ok) throw new Error(`HTTP Error: ${response.status} - ${response.statusText}`);
-            return response.text();
-        })
-        .then(text => {
-            console.log("🔍 Raw API Response:", text || "⚠ Empty response");
-            return text.trim() ? JSON.parse(text) : { results: [] };
-        })
-        .then(data => {
-            hideLoading();
-            if (!data.results || data.results.length === 0) {
-                console.warn("⚠ No flights found.");
-                document.getElementById("results").innerHTML = "<p>⚠ No flights found. Try adjusting your search criteria.</p>";
-                return;
-            }
-            displayFlightResults(data.results);
-        })
-        .catch(error => {
-            console.error("❌ API Fetch Error:", error);
-            document.getElementById("results").innerHTML = `<p>⚠ Unable to fetch flights. Check API availability.</p>`;
-            hideLoading();
-        });
-}
-
-// 🎫 Display Flight Results
-function displayFlightResults(flights) {
-    const resultsContainer = document.getElementById("results");
-    resultsContainer.innerHTML = "";
-
-    if (!flights || flights.length === 0) {
-        resultsContainer.innerHTML = "<p>No flights found. Please try another search.</p>";
-        return;
-    }
-
-    flights.forEach(flight => {
-        const flightElement = document.createElement("div");
-        flightElement.className = "flight-card";
-        flightElement.innerHTML = `
-            <h3>${flight.airline} - ${flight.flightNumber}</h3>
-            <p><strong>From:</strong> ${flight.from} → <strong>To:</strong> ${flight.to}</p>
-            <p><strong>Price:</strong> ${flight.price} PHP</p>
-            <p><strong>Departure:</strong> ${new Date(flight.departureTime).toLocaleString()}</p>
-            <p><strong>Arrival:</strong> ${new Date(flight.arrivalTime).toLocaleString()}</p>
-            <button onclick="confirmBooking('${flight.id}')">Confirm Booking</button>
-        `;
-        resultsContainer.appendChild(flightElement);
-    });
 }
 
       document.getElementById("bookingForm").addEventListener("submit", function(event) {
@@ -427,18 +317,8 @@ function displayFlightResults(flights) {
             const longitude = position.coords.longitude;
             console.log(`📍 User Location: ${latitude}, ${longitude}`);
 
-            // Reverse geocoding to fetch the country
-            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
-                .then(response => response.json())
-                .then(data => {
-                    const country = data.address.country || "Philippines"; // Default fallback
-                    console.log(`🌍 Detected Country: ${country}`);
-                    document.getElementById("takeOff").value = country;
-                })
-                .catch(error => {
-                    console.error("❌ Location fetch failed:", error);
-                    setDefaultDeparture();
-                });
+            // 🔄 Instead of fetching from OpenStreetMap, set a default country manually
+            document.getElementById("takeOff").value = "Philippines"; // You can set a different default if needed
         }
 
         function errorCallback(error) {

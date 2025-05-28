@@ -738,10 +738,10 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
             <p class="text-gray-600"><strong>Departure Date:</strong> ${departureDate}</p>
             <p class="text-gray-600"><strong>Return Date:</strong> ${returnDate}</p>
             <p class="text-gray-600"><strong>Flight Code:</strong> ${flightCode}</p>
-            <button onclick="openModifyModal()" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
+            <button class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition" id="openModifyModalButton">
                 Modify Booking
             </button>
-            <button onclick="deleteBooking()" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">
+            <button class="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition" id="deleteBookingButton">
                 Delete Booking
             </button>
         </div>
@@ -751,27 +751,40 @@ document.getElementById("bookingForm").addEventListener("submit", function (even
     dashboardResults.innerHTML = flightSummaryHTML;
 
     console.log("Dashboard successfully populated with stored booking details.");
-});
 
-// 🛠 Open Modify Booking Modal & Populate Form
+// 🛠 Open Modify Booking Modal (Smooth Popup)
 function openModifyModal(departure, destination, departureDate, returnDate, flightCode) {
-    document.getElementById("modifyBookingModal").classList.remove("hidden");
+    const modal = document.getElementById("modifyBookingModal");
+    if (!modal) {
+        console.error("Modify Booking Modal not found!");
+        return;
+    }
 
-    // Populate modification form with stored data
-    document.getElementById("modDeparture").value = departure;
-    document.getElementById("modDestination").value = destination;
-    document.getElementById("modDepartureDate").value = departureDate;
-    document.getElementById("modReturnDate").value = returnDate;
-    document.getElementById("modFlightCode").value = flightCode;
+    modal.classList.remove("hidden"); // ✅ Show modal
+    modal.classList.add("opacity-100", "scale-100"); // ✅ Smooth popup effect
+
+    // ✅ Populate modification form dynamically
+    document.getElementById("modDeparture").value = departure || "Philippines";
+    document.getElementById("modDestination").value = destination || "Japan";
+    document.getElementById("modDepartureDate").value = departureDate || "";
+    document.getElementById("modReturnDate").value = returnDate || "";
+    document.getElementById("modFlightCode").value = flightCode || "";
 }
 
-// 🛠 Close Modify Booking Modal
-document.getElementById("closeModifyModal").addEventListener("click", function () {
-    document.getElementById("modifyBookingModal").classList.add("hidden");
+// 🛠 Close Modify Booking Modal (Smooth Popup Close)
+document.getElementById("closeModifyModal")?.addEventListener("click", function () {
+    const modal = document.getElementById("modifyBookingModal");
+    if (!modal) return;
+
+    modal.classList.add("opacity-0", "scale-95"); // ✅ Smooth fade-out effect
+    setTimeout(() => {
+        modal.classList.add("hidden");
+        modal.classList.remove("opacity-100", "scale-100", "opacity-0", "scale-95"); // Reset animation classes
+    }, 300);
 });
 
 // 🛠 Handle Booking Modification Submission
-document.getElementById("modifyForm").addEventListener("submit", function (event) {
+document.getElementById("modifyForm")?.addEventListener("submit", function (event) {
     event.preventDefault();
 
     const updatedBooking = {
@@ -784,8 +797,7 @@ document.getElementById("modifyForm").addEventListener("submit", function (event
 
     console.log("Updating Booking:", updatedBooking);
 
-    // Send update request to PHP
-    fetch("update_booking.php", {
+    fetch("index.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedBooking)
@@ -793,14 +805,54 @@ document.getElementById("modifyForm").addEventListener("submit", function (event
     .then(response => response.json())
     .then(data => {
         console.log("Server Response:", data);
-        document.getElementById("modifyBookingModal").classList.add("hidden");
-        displayBooking(updatedBooking); // Update UI without reloading
+
+        if (data.status === "success") {
+            // ✅ Update the dashboard dynamically
+            document.getElementById("dashboard-results").innerHTML = `
+                <div class="bg-white p-6 md:p-8 shadow-xl rounded-lg border border-gray-300">
+                    <p class="text-gray-600"><strong>Departure:</strong> ${updatedBooking.departure}</p>
+                    <p class="text-gray-600"><strong>Destination:</strong> ${updatedBooking.destination}</p>
+                    <p class="text-gray-600"><strong>Departure Date:</strong> ${updatedBooking.departureDate}</p>
+                    <p class="text-gray-600"><strong>Return Date:</strong> ${updatedBooking.returnDate}</p>
+                    <p class="text-gray-600"><strong>Flight Code:</strong> ${updatedBooking.flightCode}</p>
+                    <button id="openModifyModalButton" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
+                        Modify Booking
+                    </button>
+                    <button id="deleteBookingButton" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">
+                        Delete Booking
+                    </button>
+                </div>
+            `;
+
+            // ✅ Reattach event listeners after modification
+            document.getElementById("openModifyModalButton")?.addEventListener("click", function () {
+                openModifyModal(
+                    updatedBooking.departure, updatedBooking.destination,
+                    updatedBooking.departureDate, updatedBooking.returnDate,
+                    updatedBooking.flightCode
+                );
+            });
+
+            document.getElementById("deleteBookingButton")?.addEventListener("click", function () {
+                deleteBooking(updatedBooking.flightCode);
+            });
+
+            // ✅ Close modal after successful update
+            document.getElementById("modifyBookingModal")?.classList.add("hidden");
+        } else {
+            console.error("Booking update failed:", data.message);
+        }
     })
     .catch(error => console.error("Error updating booking:", error));
 });
 
 // 🛠 Delete Booking
 function deleteBooking(bookingId) {
+    if (!bookingId) {
+        console.error("Invalid booking ID!");
+        return;
+    }
+
     if (confirm("Are you sure you want to delete this booking?")) {
         fetch("delete_booking.php", {
             method: "POST",
@@ -816,6 +868,51 @@ function deleteBooking(bookingId) {
     }
 }
 
+// 🛠 Attach Modify & Delete Event Listeners Dynamically ✅
+document.addEventListener("click", function (event) {
+    if (event.target.classList.contains("modifyBookingButton")) {
+        try {
+            const bookingData = event.target.dataset.booking;
+            if (!bookingData) {
+                console.error("Missing booking data in button.");
+                return;
+            }
+
+            const booking = JSON.parse(bookingData); // ✅ Parse booking data properly
+            openModifyModal(
+                booking.departure,
+                booking.destination,
+                booking.departureDate,
+                booking.returnDate,
+                booking.flightCode
+            );
+        } catch (error) {
+            console.error("Error parsing booking data:", error);
+        }
+    }
+
+    if (event.target.classList.contains("deleteBookingButton")) {
+        const bookingId = event.target.dataset.bookingId;
+        if (bookingId) {
+            deleteBooking(bookingId);
+        } else {
+            console.error("Invalid booking ID");
+        }
+    }
+});
+
+// Insert booking details into the dashboard
+dashboardResults.innerHTML = flightSummaryHTML;
+
+// Attach event listeners after the elements exist
+document.getElementById("openModifyModalButton")?.addEventListener("click", function () {
+    openModifyModal(takeOff, arrival, departureDate, returnDate, flightCode);
+});
+
+document.getElementById("deleteBookingButton")?.addEventListener("click", function () {
+    deleteBooking(flightCode);
+});
+});
 
 document.addEventListener("DOMContentLoaded", function () {
     fetch("fetch_booking.php")

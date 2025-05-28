@@ -3,14 +3,12 @@ error_reporting(E_ALL);
 ini_set("display_errors", 1);
 header("Content-Type: application/json"); // Ensure output is always JSON
 
-$conn = new mysqli("localhost", "root", "LOVEme143", "flight_bookings", 4306);
+$mysqli = new mysqli('localhost', 'root', 'LOVEme143', 'flight_bookings', 4306, '/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock');
 
 
-if ($conn->connect_error) {
-    die(json_encode(["status" => "error", "message" => "Database connection failed"]));
+if ($mysqli->connect_error) {
+    die(json_encode(["status" => "error", "message" => "Database connection failed: " . $mysqli->connect_error]));
 }
-
-$data["passenger_name"] = $data["passenger_name"] ?? "";
 
 // Log incoming data for debugging
 $logFile = "error.log";
@@ -39,7 +37,7 @@ $formattedDepartureDate = $departureDate->format('Y-m-d');
 $formattedReturnDate = $returnDate->format('Y-m-d');
 
 // ✅ Fix: Properly bind converted date values
-$stmt = $conn->prepare("INSERT INTO stored_bookings (departure, destination, departure_date, return_date, flight_code) VALUES (?, ?, ?, ?, ?)");
+$stmt = $mysqli->prepare("INSERT INTO stored_bookings (departure, destination, departure_date, return_date, flight_code) VALUES (?, ?, ?, ?, ?)");
 $stmt->bind_param("sssss", $data["departure"], $data["destination"], $formattedDepartureDate, $formattedReturnDate, $data["flightCode"]);
 
 // Execute SQL statement and handle errors
@@ -55,5 +53,5 @@ if (!$stmt->execute()) {
 }
 
 $stmt->close();
-$conn->close();
+$mysqli->close();
 ?>
